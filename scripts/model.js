@@ -12,18 +12,11 @@ class Question {
     this.timeTaken = 0;
   };
 
-  // amendQuestion(question, answers, rightAns) {
-  //   this.question = question;
-  //   this.answers = answers;
-  //   this.rightAns = rightAns;
-  //   this.qid = 0;
-  //
-  //   this.numRestarts = 0;
-  //   this.numRight = 0;
-  //   this.numWrong = 0;
-  //   this.numParticipants = 0;
-  //   this.timeTaken = 0;
-  // };
+  amendQuestion(question, answers, rightAns) {
+    this.question = question;
+    this.answers = answers;
+    this.rightAns = rightAns;
+  };
 
   restart() {
     this.numRestarts += 1;
