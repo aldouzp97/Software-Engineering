@@ -1,41 +1,119 @@
 class Question {
-  question = '';
-  answers = [];
-  rightAns;
-  uid = '';
-  numRestarts;
-  numRight;
-  numWrong;
-  totalPart;
-  timeTaken;
-
   constructor(question, answers, rightAns, uid) {
     this.question = question;
     this.answers = answers;
     this.rightAns = rightAns;
-    this.uid = uid; // TODO: randomly gen id on construct
+    this.qid = uid; // TODO: randomly gen id on construct
+
+    this.numRestarts = 0;
+    this.numRight = 0;
+    this.numWrong = 0;
+    this.numParticipants = 0;
+    this.timeTaken = 0;
+  };
+
+  // amendQuestion(question, answers, rightAns) {
+  //   this.question = question;
+  //   this.answers = answers;
+  //   this.rightAns = rightAns;
+  //   this.qid = 0;
+  //
+  //   this.numRestarts = 0;
+  //   this.numRight = 0;
+  //   this.numWrong = 0;
+  //   this.numParticipants = 0;
+  //   this.timeTaken = 0;
+  // };
+
+  restart() {
+    this.numRestarts += 1;
   }
 
-  amendQuestion(question, answers, rightAns) {
-    this.question = question;
-    this.answers = answers;
-    this.rightAns = rightAns;
+  // wrong() {
+  //   this.numWrong += 1;
+  // }
+  //
+  // correct() {
+  //   this.numRight += 1;
+  // }
+
+  answer(correctornot) {
+    if (correctornot == "correct") {
+      this.numRight += 1;
+    }
+
+    if (this.numWrong == "wrong") {
+      this.numWrong += 1;
+    }
+
+    this.numParticipants += 1;
   }
+
+  getQuestionID() {
+    return this.qid;
+  };
+
+  getAnswers() {
+    this.answers.forEach(function myFunction(item) {
+      console.log(item);
+    });
+  }
+
+  getQuestion() {
+    return this.question;
+  }
+
+  getEverythingElse() {
+    return "Number correct answers: " + this.numRight + ", Number wrong answers: " + this.numWrong + ", Participants: " + this.numParticipants;
+   }
 }
 
-class Quiz {
-  currentQuizArray = [];
-  //
-  quiz1QuestionsArray = [];
-  quiz2QuestionsArray = [];
-  // Restart quiz after 5 minutes of incativity
-  restartTimer;
-  quizData;
-  statistics;
+thisisaquestion = new Question("Who does Mario save?", ["Sonic", "Princess Peach", "John Cena"], "Princess Peach", 1);
+console.log(thisisaquestion.getQuestionID());
+console.log(thisisaquestion.getQuestion());
+thisisaquestion.getAnswers();
+thisisaquestion.answer("correct");
+console.log(thisisaquestion.getEverythingElse());
 
-  constructor(currentQuizArray) {
-    this.currentQuizArray = currentQuizArray;
+class Quiz {
+  // quiz1QuestionsArray = [];
+  // quiz2QuestionsArray = [];
+  //
+  // restartTimer;
+  // quizData;
+  // statistics;
+
+  constructor() {
+    this.currentQuizArray = [];
   }
+
+  populateQuiz() {
+    var fs = require('fs');
+    var questionArray = [];
+
+    var split_data = fs.readFileSync('./questions.txt').toString().split("\n");
+    for (var i=0; i<split_data.length; i++) {
+      var question_parts = split_data[i].split(",");
+      var answers = question_parts.slice(1, 4);
+
+      var aquestion = new Question(question_parts[0], answers, question_parts[4], i);
+      questionArray.push(aquestion);
+    }
+
+    return questionArray;
+  }
+
+  getAQuestion() {
+    var aquiz = this.populateQuiz();
+    for (var i=0; i<aquiz.length; i++) {
+      this.currentQuizArray.push(aquiz[i]);
+    }
+    console.log(this.currentQuizArray);
+  }
+
+  // constructor(currentQuizArray) {
+  //   this.currentQuizArray = currentQuizArray;
+  // }
 
   // prepareQuizzes() {
   //
@@ -45,172 +123,102 @@ class Quiz {
   //
   // }
 
+  // addQuestion(quizQuestionsArray, input) {
+  //   quizQuestionsArray = input;
+  // }
 
-
-  addQuestion(quizQuestionsArray, input) {
-    quizQuestionsArray = input;
-  }
-
-  removeQuestion() {
-
-  }
-
-  createQuestion() {
-
-  }
-
-  startQuiz() {
-
-  }
+  // removeQuestion() {
+  //
+  // }
+  //
+  // createQuestion() {
+  //
+  // }
+  //
+  // startQuiz() {
+  //
+  // }
 
   // showRandomQuestion() {
   //
   // }
 
-  answerQuestion() {
-
-  }
-
-  timeOut() {
-
-  }
-
-  resetTime() {
-
-  }
-
-  restartQuiz() {
-
-  }
-
-  genUid() {
-
-  }
-}
-
-
-
-class Statistics {
-  quizDataArray: [];
-  question: [];
-
-  // Obtain statistics for a chosen question
-  // Get statistics for the current quiz questions array
-  // “Percentage regarding how often a question is answered correctly”
-  // “The percentage of people who gave up at that question”
-  // “The question most often answered incorrectly”
-
-  displayStatisticsInterface() {
-
-  }
-
-  displayLeaderboard() {
-
-  }
-
-  givePerformanceSummary() {
-
-  }
-
-  giveImmediateFeedback() {
-
-  }
-
-  selectSpecificStatistics() {
-
-  }
-
-  getNumberOfParticipants() {
-
-  }
-
-  addQuizRecord() {
-
-  }
-}
-
-class QuizData {
-
-  idOfQuesttionAnswered;
-  wereTheyCorrect;
-  timeTakenToCompeleteQuestion;
-  didTheyRestart;
-
-  construct() {
-
-  }
-
-  resetWhenRestarted() {
-
-  }
-
-  getQuizRecord() {
-
-  }
-}
+  // answerQuestion() {
   //
-  quiz1QuestionsArray = []
+  // }
+  //
+  // timeOut() {
+  //
+  // }
+  //
+  // resetTime() {
+  //
+  // }
+  //
+  // restartQuiz() {
+  //
+  // }
+}
 
+var aquiz = new Quiz();
+aquiz.populateQuiz();
+aquiz.getAQuestion();
+
+// class Statistics {
+//   quizDataArray: [];
+//   question: [];
 //
-// Who does Mario save?
-// Sonic
-// Princess Peach - A
-// John Cena
+//   // Obtain statistics for a chosen question
+//   // Get statistics for the current quiz questions array
+//   // “Percentage regarding how often a question is answered correctly”
+//   // “The percentage of people who gave up at that question”
+//   // “The question most often answered incorrectly”
 //
-// What is archnaphobia?
-// fear of spiders - A
-// fear of bears
-// fear of your parents
+//   displayStatisticsInterface() {
 //
-// When was the battle of hastings?
-// 1914
-// 1066 - A
-// 2020
+//   }
 //
-// Which is a dance in the game fortnite?
-// the waltz
-// the floss - A
-// the duggy
+//   displayLeaderboard() {
 //
-// How many pairs of ribs would the normal human have?
-// 10
-// 12 - A
-// 14
+//   }
 //
-// If you subtract the number of sides on a heptagon from the number of sides on a dodecagon what answer do you get?
-// 3
-// 4
-// 5 - A
+//   givePerformanceSummary() {
 //
-// Which is the fighter created in Uk?
-// Bf109
-// Spitfire - A
-// P-51
+//   }
 //
-// Which medium does sound travel faster？
-// Air
-// Water
-// Solid - A
+//   giveImmediateFeedback() {
 //
-// The French number ‘neuf’ is what in English?
-// 9 - A
+//   }
 //
-// Which number lies directly opposite the number three on a standard die?
-// 4 - A
-// 5
-// 2
+//   selectSpecificStatistics() {
 //
-// What is the largest US state by size?
-// Texas - A
-// Californa
-// New Mexico
+//   }
 //
-// Who created Facebook?
-// Mark Zuckerberg - A
-// Peter Jones
-// Tom Anderson
+//   getNumberOfParticipants() {
 //
-// What colour to do you get when you mix red and white?
-// Red
-// Pink - A
-// White
+//   }
+//
+//   addQuizRecord() {
+//
+//   }
+// }
+
+// class QuizData {
+//
+//   idOfQuesttionAnswered;
+//   wereTheyCorrect;
+//   timeTakenToCompeleteQuestion;
+//   didTheyRestart;
+//
+//   construct() {
+//
+//   }
+//
+//   resetWhenRestarted() {
+//
+//   }
+//
+//   getQuizRecord() {
+//
+//   }
+// }
