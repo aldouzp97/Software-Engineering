@@ -1,3 +1,4 @@
+// Question model
 class Question {
   constructor(question, answers, rightAns, uid) {
     this.question = question;
@@ -16,6 +17,13 @@ class Question {
     this.question = question;
     this.answers = answers;
     this.rightAns = rightAns;
+
+    // Reset stats when amended?
+    // this.numRestarts = 0;
+    // this.numRight = 0;
+    // this.numWrong = 0;
+    // this.numParticipants = 0;
+    // this.timeTaken = 0;
   };
 
   restart() {
@@ -31,11 +39,9 @@ class Question {
   // }
 
   answer(correctornot) {
-    if (correctornot == "correct") {
+    if (correctornot) {
       this.numRight += 1;
-    }
-
-    if (this.numWrong == "wrong") {
+    } else {
       this.numWrong += 1;
     }
 
@@ -58,7 +64,7 @@ class Question {
 
   getEverythingElse() {
     return "Number correct answers: " + this.numRight + ", Number wrong answers: " + this.numWrong + ", Participants: " + this.numParticipants;
-   }
+  }
 }
 
 thisisaquestion = new Question("Who does Mario save?", ["Sonic", "Princess Peach", "John Cena"], "Princess Peach", 1);
@@ -68,24 +74,30 @@ thisisaquestion.getAnswers();
 thisisaquestion.answer("correct");
 console.log(thisisaquestion.getEverythingElse());
 
+
+//  Quiz model
 class Quiz {
-  // quiz1QuestionsArray = [];
-  // quiz2QuestionsArray = [];
-  //
-  // restartTimer;
-  // quizData;
-  // statistics;
+  currentQuizArray = [];
+  quiz1QuestionsArray = [];
+  quiz2QuestionsArray = [];
+
+  quizData;
+  statistics;
 
   constructor() {
-    this.currentQuizArray = [];
+    this.currentQuizArray = []; // Current pool of questions
+    this.quiz1QuestionsArray = []; // Question pool for quiz 1
+    this.quiz2QuestionsArray = []; // Question pool for quiz 2
+    this.totalparticipants = 0;
   }
 
-  populateQuiz() {
+  // Adds question pools for each type of quiz to respective arrays
+  populateQuizpools() {
     var fs = require('fs');
     var questionArray = [];
 
     var split_data = fs.readFileSync('./questions.txt').toString().split("\n");
-    for (var i=0; i<split_data.length; i++) {
+    for (var i = 0; i < split_data.length; i++) {
       var question_parts = split_data[i].split(",");
       var answers = question_parts.slice(1, 4);
 
@@ -93,125 +105,96 @@ class Quiz {
       questionArray.push(aquestion);
     }
 
-    return questionArray;
-  }
-
-  getAQuestion() {
-    var aquiz = this.populateQuiz();
-    for (var i=0; i<aquiz.length; i++) {
-      this.currentQuizArray.push(aquiz[i]);
+    for (var i = 0; i < questionArray.length; i++) {
+      this.currentQuizArray.push(questionArray[i]);
     }
-    console.log(this.currentQuizArray);
   }
 
-  // constructor(currentQuizArray) {
-  //   this.currentQuizArray = currentQuizArray;
-  // }
+  addQuestionToPool(questionPool, questionIndex, desiredPool) {
+    if (desiredPool.length < 5) {
+      desiredPool.push(questionPool[questionIndex]); //Taking an existing question and putting it in desired pool
 
-  // prepareQuizzes() {
-  //
-  // }
+    } else {
+      return false
+    }
+  }
 
-  // changeCurrentQuiz() {
-  //
-  // }
+  // Remove for quiz1 or quiz 2 pool
+  removeQuestionFromPool(desiredPool, questionIndex) {
+    delete desiredPool[questionIndex];
+  }
 
-  // addQuestion(quizQuestionsArray, input) {
-  //   quizQuestionsArray = input;
-  // }
+  // Permanent removal from question Pool
+  deleteQuestion(questionPool, questionIndex) {
+    delete questionPool[questionIndex];
+  }
 
-  // removeQuestion() {
-  //
-  // }
-  //
-  // createQuestion() {
-  //
-  // }
-  //
-  // startQuiz() {
-  //
-  // }
+  // Create
+  createQuestion(questionPool, newQuestion) {
+    questionPool.push(question);
+  }
 
-  // showRandomQuestion() {
-  //
-  // }
+  // Randomise currentPool of questions before the quiz is restarted.
+  randomizeQuizpool(desiredPool) {
 
-  // answerQuestion() {
-  //
-  // }
-  //
-  // timeOut() {
-  //
-  // }
-  //
-  // resetTime() {
-  //
-  // }
-  //
-  // restartQuiz() {
-  //
-  // }
+  }
+
+  answerQuestion(question) {
+
+  }
 }
 
 var aquiz = new Quiz();
-aquiz.populateQuiz();
-aquiz.getAQuestion();
 
-// class Statistics {
-//   quizDataArray: [];
-//   question: [];
-//
-//   // Obtain statistics for a chosen question
-//   // Get statistics for the current quiz questions array
-//   // “Percentage regarding how often a question is answered correctly”
-//   // “The percentage of people who gave up at that question”
-//   // “The question most often answered incorrectly”
-//
-//   displayStatisticsInterface() {
-//
-//   }
-//
-//   displayLeaderboard() {
-//
-//   }
-//
-//   givePerformanceSummary() {
-//
-//   }
-//
-//   giveImmediateFeedback() {
-//
-//   }
-//
-//   selectSpecificStatistics() {
-//
-//   }
-//
-//   getNumberOfParticipants() {
-//
-//   }
-//
-//   addQuizRecord() {
-//
-//   }
-// }
+// Statistics
+class Statistics {
+  // quizDataArray: [];
+  question: [];
 
-// class QuizData {
-//
-//   idOfQuesttionAnswered;
-//   wereTheyCorrect;
-//   timeTakenToCompeleteQuestion;
-//   didTheyRestart;
-//
-//   construct() {
-//
-//   }
-//
-//   resetWhenRestarted() {
-//
-//   }
-//
-//   getQuizRecord() {
-//
-//   }
-// }
+  // Obtain statistics for a chosen question
+  // Get statistics for the current quiz questions array
+  // “Percentage regarding how often a question is answered correctly”
+  // “The percentage of people who gave up at that question”
+  // “The question most often answered incorrectly”
+
+  givePerformanceSummary() {
+
+  }
+
+  giveImmediateFeedback() {
+
+  }
+
+  selectSpecificStatistics() {
+
+  }
+
+  getNumberOfParticipants() {
+
+  }
+
+  addQuizRecord() {
+
+  }
+}
+
+// User Stats
+class QuizData {
+
+  idOfQuestionAnswered;
+  wereTheyCorrect;
+  timeTakenToCompeleteQuestion;
+  didTheyRestart;
+
+  constructor() {
+
+  }
+
+  resetWhenRestarted() {
+
+  }
+
+  getQuizRecord() {
+
+  }
+}
