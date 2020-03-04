@@ -1,0 +1,112 @@
+
+body{
+  margin: auto;
+  width:60%;
+}
+
+header{
+  text-align: center;
+  color: red;
+  font-size: 30px
+}
+
+.wrapper{
+  background-image: url(wolf.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-flex;
+  width: 100%;
+  text-align: center;
+  height: 600px;
+  border-style: solid;
+  color: red;
+  font-size: 40px;
+}
+
+.first{
+  width:20%;
+  background-color: red;
+
+}
+
+.second{
+  width:20%;
+  background-color: white
+}
+
+.third{
+  width:20%;
+  background-color: red;
+}
+
+.fourth{
+  width:20%;
+  background-color: white;
+}
+
+.fifth{
+  width:20%;
+  background-color: red;
+}
+
+p{
+  margin-left:75px;
+}
+
+/*
+.wrapper p{
+  margin-top: 225px;
+  /* background-color: #bbb; */
+/* }  */
+
+.dot p{
+  height: 50px;
+  width: 50px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  margin-top: 275px
+}
+
+.second .dot p{
+  background-color: red;
+  color: white;
+}
+
+.fourth .dot p{
+  background-color: red;
+  color: white;
+}
+
+.picAnswer{
+  margin-top: 5%;
+}
+
+form input[type="text"],
+textarea,
+select {
+  /* background: rgba(255,255,255,0); */
+  border: none;
+  font-size: 16px;
+  margin-left: 5px;
+  height: 50px;
+  padding-left: 10px;
+  outline: 0;
+  width: 75%;
+  background-color: #e8eeef;
+  color: #8a97a0;
+  box-shadow: 0 1px 0 rgb(0,0,0,0.3) inset;
+}
+
+#guess_button{
+  height: 50px;
+  width: 20%;
+  float:right;
+  color: white;
+  background-color: red;
+  border-radius: 1px;
+  border-width: 1px 1px 3px;
+  text-align: center;
+  font-style: normal;
+  font-size: 20px
+}
