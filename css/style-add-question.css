@@ -1,0 +1,135 @@
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.bg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: #efefef;
+}
+
+.content {
+    width: 1024px;
+    height: 100%;
+    background-color: white;
+    padding-top: 50px;
+    margin: 0px auto;
+}
+
+.title {
+    width: 500px;
+    height: 100px;
+    text-align: center;
+    float: left;
+    line-height: 80px;
+    font-size: 50px;
+    margin-left: 150px;
+    color: #D73646;
+}
+
+.close {
+    width: 70px;
+    height: 70px;
+    margin-left: 65px;
+    float: left;
+}
+
+.logo {
+    width: 100%;
+    height: 100px;
+}
+
+.close:hover {
+    background-color: #F7D3C4;
+}
+
+.index {
+    width: 100px;
+    height: 500px;
+    float: left;
+    margin-left: 50px;
+}
+
+.index div {
+    width: 70px;
+    height: 70px;
+    margin: 15px auto;
+}
+
+.index div img {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+}
+
+.index div span {
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    position: absolute;
+    font-size: 30px;
+    color: white;
+}
+
+.question_and_answer {
+    width: 700px;
+    height: 550px;
+    float: left;
+    margin-left: 40px;
+}
+
+.question {
+    width: 680px;
+    height: 160px;
+    margin: 10px auto;
+}
+
+.question input {
+    width: 640px;
+    height: 120px;
+    padding: 20px;
+    font-size: 20px;
+    border: #cccccc solid 1px;
+    border-radius: 10px;
+}
+
+.answer {
+    width: 680px;
+    height: 60px;
+    margin: 30px auto;
+}
+
+.answer input {
+    width: 500px;
+    height: 20px;
+    padding: 20px;
+    font-size: 20px;
+    border: #cccccc solid 1px;
+    border-radius: 10px;
+}
+
+.answer img {
+    width: 60px;
+    height: 60px;
+    float: right;
+}
+
+.save {
+    width: 400px;
+    height: 50px;
+    background-color: #D73646;
+    margin: 0px auto;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 30px;
+    line-height: 50px;
+    color: white;
+}
+
+.save:hover {
+    background-color: #F7D3C4;
+}
