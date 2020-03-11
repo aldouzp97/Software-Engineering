@@ -1,7 +1,8 @@
 class Quiz {
   questions = [];
-  participants;
-  timetaken = [];
+  q = 0;            // Question tracker
+  participants = 0;
+  timeTaken = [];
 
   constructor() {
     this.questions = [];
@@ -9,21 +10,91 @@ class Quiz {
     this.timetaken = [];
   }
 
-  populateQuiz(quizNumber) {
-    var fs = require('fs');
-    var questionArray = [];
+  // Returns next question by incrementing q(question tracker)
+  getNextQuestion(){
+    this.q += 1;
+    return this.questions[this.q];
+  }
 
-    var split_data = fs.readFileSync('./questions' + quizNumber + '.txt').toString().split("\n");
-    for (var i = 0; i < split_data.length; i++) {
-      var question_parts = split_data[i].split(",");
-      var answers = question_parts.slice(1, 4);
+  // q set to 0 number of participants incremented
+  startQuiz() {
+    this.q = 0;
+    this.participants += 1;
+    return this.questions[this.q];
+  }
 
-      var aquestion = new Question(question_parts[0], answers, question_parts[4], i);
-      questionArray.push(aquestion);
+  // Push question object into array holding questions
+  addQuestion(question) {
+    questions.push(question);
+  }
+
+  // Removes question via index
+  removeQuestion(index) {
+    prev = index - 1;               // Splice requires 2 numbers
+    questions.splice(prev, index);  // Removes anything between prev and index
+  }
+
+  // At the end of the quiz particpant time is taken
+  endQuiz(participantTime) {
+    timeTaken.push(participantTime);
+  }
+
+  // If a file exists containg questions setup here
+  prepareQuiz() {
+
+  }
+
+}
+
+class Question {
+  constructor(question, answers, rightAns, uid) {
+    this.question = question;
+    this.answers = answers;
+    this.rightAns = rightAns;
+    this.qid = uid; // TODO: randomly gen id on construct
+
+    this.numRestarts = 0;
+    this.numRight = 0;
+    this.numWrong = 0;
+    this.numParticipants = 0;
+    this.timeTaken = 0;
+  };
+
+  amendQuestion(question, answers, rightAns) {
+    this.question = question;
+    this.answers = answers;
+    this.rightAns = rightAns;
+  };
+
+  restart() {
+    this.numRestarts += 1;
+  }
+
+  answer(correctornot) {
+    if (correctornot) {
+      this.numRight += 1;
+    } else {
+      this.numWrong += 1;
     }
 
-    for (var i = 0; i < questionArray.length; i++) {
-      this.currentQuizArray.push(questionArray[i]);
-    }
+    this.numParticipants += 1;
+  }
+
+  getQuestionID() {
+    return this.qid;
+  };
+
+  getAnswers() {
+    this.answers.forEach(function myFunction(item) {
+      console.log(item);
+    });
+  }
+
+  getQuestion() {
+    return this.question;
+  }
+
+  getEverythingElse() {
+    return "Number correct answers: " + this.numRight + ", Number wrong answers: " + this.numWrong + ", Participants: " + this.numParticipants;
   }
 }
