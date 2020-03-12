@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Add Question</title>
     <link href="css/style-add-question.css" type="text/css" rel="stylesheet">
-    <script rel="script" src="scripts/addQuestion.js"></script>
 </head>
 <body>
 
@@ -40,22 +39,22 @@
         </div>
         <div class="question_and_answer">
             <div class="question">
-                <input type="text" placeholder="Enter question here...">
+                <input type="text" placeholder="Enter question here..."  id="input_question">
             </div>
 
             <div class="answer">
-                <input type="text" placeholder="Enter answer here...">
-                <img src="image/ic_circle.png">
+                <input type="text" placeholder="Enter answer here..." id="input_answer1">
+                <img src="image/ic_check.png" onclick="check1()" id="img_check1">
             </div>
             <div class="answer">
-                <input type="text" placeholder="Enter answer here...">
-                <img src="image/ic_circle.png">
+                <input type="text" placeholder="Enter answer here..." id="input_answer2">
+                <img src="image/ic_circle.png" onclick="check2()" id="img_check2">
             </div>
             <div class="answer">
-                <input type="text" placeholder="Enter answer here...">
-                <img src="image/ic_circle.png">
+                <input type="text" placeholder="Enter answer here..." id="input_answer3">
+                <img src="image/ic_circle.png" onclick="check3()" id="img_check3">
             </div>
-            <div class="save">
+            <div class="save" onclick="addQuestion()">
                 Save
             </div>
         </div>
@@ -64,4 +63,6 @@
 </div>
 
 </body>
+<script rel="script" src="scripts/model.js"></script>
+<script rel="script" src="scripts/addQuestion.js"></script>
 </html>
