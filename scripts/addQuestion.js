@@ -1,9 +1,54 @@
+let check = 1;
 
 function addQuestion() {
-    // let input_question = document.querySelector("#input_question");
-    // alert(input_question.value)
-    //
-    // let parse = JSON.parse("{\"name\":\"xiao\",\"age\":12};");
-    // alert(parse)
+    let question = document.querySelector("#input_question").value;
+    let answer1 = document.querySelector("#input_answer1").value;
+    let answer2 = document.querySelector("#input_answer2").value;
+    let answer3 = document.querySelector("#input_answer3").value;
+
+    let rightAns;
+    if (check == 1) {
+        rightAns = answer1;
+    } else if (check == 2) {
+        rightAns = answer2;
+    } else if (check == 3) {
+        rightAns = answer3;
+    }
+
+    let q = new Question(question, [answer1, answer2, answer3], rightAns);
+    let parse = JSON.stringify(q);
+
+    alert(parse);
 }
 
+function check1() {
+    reset();
+    document.querySelector("#img_check1").setAttribute("src", "image/ic_check.png");
+    check = 1;
+}
+
+function check2() {
+    reset();
+    document.querySelector("#img_check2").setAttribute("src", "image/ic_check.png");
+    check = 2;
+}
+
+function check3() {
+    reset();
+    document.querySelector("#img_check3").setAttribute("src", "image/ic_check.png");
+    check = 3;
+}
+
+function reset() {
+    document.querySelector("#img_check1").setAttribute("src", "image/ic_circle.png");
+    document.querySelector("#img_check2").setAttribute("src", "image/ic_circle.png");
+    document.querySelector("#img_check3").setAttribute("src", "image/ic_circle.png");
+}
+
+class Question {
+    constructor(question, answers, rightAns) {
+        this.question = question;
+        this.answers = answers;
+        this.rightAns = rightAns;
+    };
+}
