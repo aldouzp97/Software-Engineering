@@ -65,7 +65,7 @@
 }
 
 .option1:hover {
-    background-color: rgb(20, 183, 131);
+    background-color: rgb(59, 128, 201);
 }
 
 
@@ -83,7 +83,7 @@
 }
 
 .option2:hover {
-    background-color: rgb(20, 183, 131);
+    background-color: rgb(59, 128, 201);
 }
 
 .option3 {
@@ -100,5 +100,5 @@
 }
 
 .option3:hover {
-    background-color: rgb(20, 183, 131);
+    background-color: rgb(59, 128, 201);
 }
