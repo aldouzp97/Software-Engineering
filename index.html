@@ -1,20 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-  <link rel="stylesheet" type="text/css" href="./styles/main.css">
-  <title>Menu</title>
+    <meta charset="UTF-8">
+  <title>Quiz</title>
+  <link rel="stylesheet" type="text/css" href="css/style-index.css">
 </head>
 <body>
-  <h1>Welcome to Quiz</h1>
 
-  <img src="image/cardifflogo.jpg"  alt="cardifflogo" align="right">
+<div class="bg">
+  <div class="content">
+    <a href="javascript:void(0)" onclick="showMenu()"><img src="image/ic_menu.png" alt="" id="img_menu"></a>
+    <img src="image/cardifflogo.jpg" alt="" id="img_logo">
+    <p id="p_title">Welcome to Quiz</p>
+    <a href="#" id="a_button">Click Here to Start</a>
+  </div>
+</div>
+<div id="div_menu">
+  <a href="questionPool.html" class="menu_item">Question Pool</a>
+  <a href="addQuestion.html" class="menu_item">Prepare Quiz</a>
+  <a href="#" class="menu_item">Quiz Statistics</a>
+  <a href="#" class="menu_item">Option</a>
+  <a href="#" class="menu_item">Option</a>
+  <a href="#" class="menu_item">Option</a>
+</div>
 
-  <h2>Click here to start</h2>
+<script rel="script" src="scripts/index.js">
 
-
+</script>
 </body>
 </html>

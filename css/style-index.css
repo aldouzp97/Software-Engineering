@@ -1,0 +1,90 @@
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.bg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: #efefef;
+}
+
+.content {
+    width: 1024px;
+    height: 100%;
+    background-color: #D73646;
+    margin: 0px auto;
+}
+
+#img_menu {
+    width: 80px;
+    height: 80px;
+    float: left;
+    margin: 30px;
+}
+
+#img_menu:hover {
+    background-color: #DF5D65;
+}
+
+#img_logo {
+    width: 150px;
+    height: 150px;
+    float: right;
+    margin: 20px;
+}
+
+#p_title {
+    color: white;
+    font-size: 80px;
+    top: 35%;
+    position: relative;
+    margin: 0px auto;
+}
+
+#a_button {
+    background-color: white;
+    color: black;
+    font-size: 40px;
+    margin: 0px auto;
+    display: table;
+    position: relative;
+    top: 45%;
+    border-radius: 20px;
+    padding: 20px 60px;
+    text-decoration: none;
+}
+
+#a_button:hover {
+    background-color: #cccccc;
+}
+
+#div_menu {
+    width: 200px;
+    height: 300px;
+    background-color: white;
+    position: fixed;
+    margin-top: 120px;
+    margin-left: 290px;
+    opacity: 0.9;
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: none;
+}
+
+.menu_item {
+    width: 190px;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 10px;
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+.menu_item:hover{
+    background-color: #cccccc;
+}
