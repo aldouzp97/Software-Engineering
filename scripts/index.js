@@ -10,19 +10,3 @@ function showMenu() {
         menu_show = true;
     }
 }
-
-readTextFile("./scripts/questions.txt");
-
-function readTextFile(file) {
-    let rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function () {
-        if (rawFile.readyState == 4) {
-            if (rawFile.status == 200 || rawFile.status == 0) {
-                let allText = rawFile.responseText;
-                document.cookie = "quizdata:" + allText;
-            }
-        }
-    }
-    rawFile.send(null);
-}

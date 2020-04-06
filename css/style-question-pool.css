@@ -4,7 +4,7 @@
     padding: 0px;
 }
 
-body{
+body {
     background-color: #efefef;
 }
 
@@ -15,15 +15,54 @@ body{
     margin: 0px auto;
 }
 
-.item {
-    width: 100px;
-    height: 300px;
-    background-color: #D73646;
-}
-
 #p_title {
     font-size: 50px;
     color: #D73646;
     text-align: center;
     padding: 20px 0px;
+}
+
+#list {
+
+}
+
+.item {
+    width: 100%;
+    height: auto;
+    color: #D73646;
+    padding-bottom: 30px;
+}
+
+.item:hover {
+    background-color: #EBCBCE;
+}
+
+.item_text {
+    padding-top: 30px;
+    padding-left: 40px;
+}
+
+#add {
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    right: 25%;
+    bottom: 10%;
+    display: block;
+}
+
+#add:hover {
+    opacity: 0.6;
+}
+
+.close {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    top: 3%;
+    left: 18%;
+}
+
+.close:hover{
+    opacity: 0.6;
 }

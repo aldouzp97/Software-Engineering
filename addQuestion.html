@@ -9,9 +9,8 @@
 
 <div class="bg">
     <div class="content">
-
         <div class="logo">
-            <img src="image/ic_close.png" class="close">
+            <a href="/questionPool"><img src="image/ic_close.png" class="close"></a>
             <span class="title">Add Question</span>
         </div>
 
@@ -39,7 +38,7 @@
         </div>
         <div class="question_and_answer">
             <div class="question">
-                <input type="text" placeholder="Enter question here..."  id="input_question">
+                <input type="text" placeholder="Enter question here..." id="input_question">
             </div>
 
             <div class="answer">
@@ -54,15 +53,12 @@
                 <input type="text" placeholder="Enter answer here..." id="input_answer3">
                 <img src="image/ic_circle.png" onclick="check3()" id="img_check3">
             </div>
-            <div class="save" onclick="addQuestion()">
-                Save
-            </div>
+            <a href="javascript:void(0)" class="save" onclick="addQuestion()">Save</a>
         </div>
 
     </div>
 </div>
 
-</body>
-<script rel="script" src="scripts/model.js"></script>
 <script rel="script" src="scripts/addQuestion.js"></script>
+</body>
 </html>

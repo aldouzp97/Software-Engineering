@@ -6,6 +6,11 @@ function addQuestion() {
     let answer2 = document.querySelector("#input_answer2").value;
     let answer3 = document.querySelector("#input_answer3").value;
 
+    if (question == "" || answer1 == "" || answer2 == "" || answer3 == "") {
+        alert("Please input content.");
+        return;
+    }
+
     let rightAns;
     if (check == 1) {
         rightAns = answer1;
@@ -15,10 +20,18 @@ function addQuestion() {
         rightAns = answer3;
     }
 
-    let q = new Question(question, [answer1, answer2, answer3], rightAns);
-    let parse = JSON.stringify(q);
+    let q = new Question(question, [answer1, answer2, answer3], rightAns, 1);
+    add(JSON.stringify(q));
+}
 
-    alert(parse);
+function add(str) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open('POST', "http://localhost:3000/add");
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.onload = function () {
+        window.location.replace("/questionPool");
+    }
+    xhttp.send(str);
 }
 
 function check1() {
@@ -46,9 +59,10 @@ function reset() {
 }
 
 class Question {
-    constructor(question, answers, rightAns) {
+    constructor(question, answers, rightAns, uid) {
         this.question = question;
         this.answers = answers;
         this.rightAns = rightAns;
-    };
+        this.qid = uid;
+    }
 }
