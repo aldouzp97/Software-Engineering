@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-//model
+//class from model.js
 class Question {
     constructor(question, answers, rightAns, uid) {
         this.question = question;
@@ -24,7 +24,7 @@ app.use('/css', express.static('css'));
 app.use('/scripts', express.static('scripts'));
 app.use('/image', express.static('image'));
 
-//router
+//get
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
@@ -34,7 +34,14 @@ app.get('/questionPool', (req, res) => {
 app.get('/addQuestion', (req, res) => {
     res.sendFile(__dirname + '/addQuestion.html');
 });
+app.get('/prepareQuiz', (req, res) => {
+    res.sendFile(__dirname + '/prepareQuiz.html');
+});
+app.get('/previewQuiz/:quizId', (req, res) => {
+    res.sendFile(__dirname + '/previewQuiz.html');
+});
 
+//post
 app.post('/questionList', (req, res) => {
     res.send(fs.readFileSync('./scripts/questionList.txt').toString());
 });
