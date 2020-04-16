@@ -29,16 +29,16 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 app.get('/questionPool', (req, res) => {
-    res.sendFile(__dirname + '/questionPool.html');
+    res.sendFile(__dirname + '/pages/questionPool.html');
 });
 app.get('/addQuestion', (req, res) => {
-    res.sendFile(__dirname + '/addQuestion.html');
+    res.sendFile(__dirname + '/pages/addQuestion.html');
 });
 app.get('/prepareQuiz', (req, res) => {
-    res.sendFile(__dirname + '/prepareQuiz.html');
+    res.sendFile(__dirname + '/pages/prepareQuiz.html');
 });
 app.get('/previewQuiz/:quizId', (req, res) => {
-    res.sendFile(__dirname + '/previewQuiz.html');
+    res.sendFile(__dirname + '/pages/previewQuiz.html');
 });
 
 //post
