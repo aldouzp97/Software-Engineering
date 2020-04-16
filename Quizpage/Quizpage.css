@@ -27,7 +27,6 @@
     margin-left: 10px; 
 }
 
-
 /*   Question and answeer part   */
 .QA {
     float: left;
@@ -63,9 +62,12 @@
     margin-top: 60px;
     text-align: center;
     line-height: 66px;
-    
-
 }
+
+.option1:hover {
+    background-color: rgb(59, 128, 201);
+}
+
 
 .option2 {
     
@@ -80,6 +82,10 @@
     line-height: 66px;
 }
 
+.option2:hover {
+    background-color: rgb(59, 128, 201);
+}
+
 .option3 {
     
     width: 773px;
@@ -91,4 +97,8 @@
     margin-top: 30px;
     text-align: center;
     line-height: 66px;
+}
+
+.option3:hover {
+    background-color: rgb(59, 128, 201);
 }

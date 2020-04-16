@@ -2,19 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Quiz | Home</title>
 
-  <link rel="stylesheet" type="text/css" href="./styles/main.css">
-  <title>Menu</title>
+  <link rel="stylesheet" type="text/css" href="css/style-main.css">
+  <link rel="stylesheet" type="text/css" href="css/style-index.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Welcome to Quiz</h1>
 
-  <img src="image/cardifflogo.jpg"  alt="cardifflogo" align="right">
+  <section class="group">
+    <div class="container">
+      <img class="dropbtn img_menu" onclick="showMenu()" src="image/ic_menu.png">
+      <img src="image/cardifflogo.jpg" alt="" class="img_logo">
 
-  <h2>Click here to start</h2>
+      <div id="div_menu" class="dropdown-content">
+        <a href="#" class="menu_item">Open Editor</a>
+        <a href="#" class="menu_item">Quit Quiz</a>
+      </div>
+    </div>
+  </section>
 
+  <section>
+    <div class="container">
+      <div class="content">
+        <h1 class="p_title">Welcome to the Quiz</h1>
+        <button class="btn ">Click here to Start</button>
+      </div>
+    </div>
+  </section>
 
+  <script rel="script" src="scripts/index.js"></script>
 </body>
 </html>
