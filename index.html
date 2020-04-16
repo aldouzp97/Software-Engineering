@@ -1,4 +1,3 @@
-@@ -1,38 +0,0 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,13 +13,17 @@
 
   <section class="group">
     <div class="container">
-      <img class="dropbtn img_menu" onclick="showMenu()" src="image/ic_menu.png">
+      <img src="image/ic_menu.png" class="dropbtn img_menu" onclick="showMenu()">
       <img src="image/cardifflogo.jpg" alt="" class="img_logo">
 
       <div id="div_menu" class="dropdown-content">
-        <a href="/questionPool" class="menu_item">Open Editor</a>
+        <!-- BEFORE CHANGES -->
+        <!-- <a href="/questionPool" class="menu_item">Open Editor</a>
         <a href="/addQuestion" class="menu_item">Add Question</a>
-        <a href="#" class="menu_item">Quit Quiz</a>
+        <a href="#" onclick="closeQuiz()" class="menu_item">Quit Quiz</a> -->
+
+        <a href="/password" class="menu_item">Open Editor</a>
+        <a href="#" onclick="closeQuiz()" class="menu_item">Quit Quiz</a>
       </div>
     </div>
   </section>
@@ -29,7 +32,7 @@
     <div class="container">
       <div class="content">
         <h1 class="p_title">Welcome to the Quiz</h1>
-        <button class="btn ">Click here to Start</button>
+        <button class="btn" onclick="startQuiz()">Click here to Start</button>
       </div>
     </div>
   </section>

@@ -40,6 +40,15 @@ app.get('/prepareQuiz', (req, res) => {
 app.get('/previewQuiz/:quizId', (req, res) => {
     res.sendFile(__dirname + '/pages/previewQuiz.html');
 });
+app.get('/password', (req, res) => {
+    res.sendFile(__dirname + '/pages/password.html');
+});
+app.get('/chooseQuizToEdit', (req, res) => {
+    res.sendFile(__dirname + '/pages/select_quiz/select_edit.html');
+});
+app.get('/chooseQuizToStart', (req, res) => {
+    res.sendFile(__dirname + '/pages/select_quiz/select_start.html');
+});
 
 //post
 app.post('/questionList', (req, res) => {
