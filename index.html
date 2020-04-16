@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Quiz</title>
-    <link rel="stylesheet" type="text/css" href="css/style-index.css">
+  <meta charset="UTF-8">
+  <title>Quiz | Home</title>
+
+  <link rel="stylesheet" type="text/css" href="css/style-main.css">
+  <link rel="stylesheet" type="text/css" href="css/style-index.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div class="bg">
-    <div class="content">
-        <a href="javascript:void(0)" onclick="showMenu()"><img src="image/ic_menu.png" alt="" id="img_menu"></a>
-        <img src="image/cardifflogo.jpg" alt="" id="img_logo">
-        <p id="p_title">Welcome to Quiz</p>
-        <a href="#" id="a_button">Click Here to Start</a>
+  <section class="group">
+    <div class="container">
+      <img class="dropbtn img_menu" onclick="showMenu()" src="image/ic_menu.png">
+      <img src="image/cardifflogo.jpg" alt="" class="img_logo">
+
+      <div id="div_menu" class="dropdown-content">
+        <a href="#" class="menu_item">Open Editor</a>
+        <a href="#" class="menu_item">Quit Quiz</a>
+      </div>
     </div>
-</div>
-<div id="div_menu">
-    <a href="/questionPool" class="menu_item">Question Pool</a>
-    <a href="/prepareQuiz" class="menu_item">Prepare Quiz</a>
-    <a href="#" class="menu_item">Quiz Statistics</a>
-    <a href="#" class="menu_item">Option</a>
-    <a href="#" class="menu_item">Option</a>
-    <a href="#" class="menu_item">Option</a>
-</div>
+  </section>
 
-<script rel="script" src="scripts/index.js">
+  <section>
+    <div class="container">
+      <div class="content">
+        <h1 class="p_title">Welcome to the Quiz</h1>
+        <button class="btn ">Click here to Start</button>
+      </div>
+    </div>
+  </section>
 
-</script>
+  <script rel="script" src="scripts/index.js"></script>
 </body>
 </html>
