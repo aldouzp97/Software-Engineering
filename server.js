@@ -31,6 +31,9 @@ app.get('/', (req, res) => {
 app.get('/questionPool', (req, res) => {
     res.sendFile(__dirname + '/pages/questionPool.html');
 });
+app.get('/questionPool/:quizId', (req, res) => {
+    res.sendFile(__dirname + '/pages/questionPool.html');
+});
 app.get('/addQuestion', (req, res) => {
     res.sendFile(__dirname + '/pages/addQuestion.html');
 });
@@ -54,6 +57,13 @@ app.get('/chooseQuizToStart', (req, res) => {
 app.post('/questionList', (req, res) => {
     res.send(fs.readFileSync('./scripts/questionList.txt').toString());
 });
+app.post('/pool1', (req, res) => {
+    res.send(fs.readFileSync('./assets/questions/pool_1.csv').toString());
+});
+app.post('/pool2', (req, res) => {
+    res.send(fs.readFileSync('./assets/questions/pool_2.csv').toString());
+});
+
 app.post('/add', (req, res) => {
     let arr = JSON.parse(fs.readFileSync('./scripts/questionList.txt').toString());
     arr.push(new Question(req.body.question, req.body.answers, req.body.rightAns, req.body.uid));

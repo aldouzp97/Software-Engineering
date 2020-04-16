@@ -27,6 +27,12 @@ function returnToHome() {
   window.location.href = "/";
 }
 
-function openEditor() {
-  window.location.href = "/questionPool";
+function openEditor(quiz_number) {
+  if (quiz_number === 1) {
+    window.location.href = "/questionPool/1";
+  }
+
+  if (quiz_number === 2) {
+    window.location.href = "/questionPool/2";
+  }
 }
