@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Question Pool</title>
+  <link rel="stylesheet" type="text/css" href="/css/style-main.css">
+  <link rel="stylesheet" type="text/css" href="/css/style-editor-options.css">
+</head>
+<body>
+
+  <section class="bg">
+    <div class="container content">
+      <img src="/image/ic_add.png" class="add" onclick="addQuestion()">
+      <img src="/image/ic_close.png" class="close" onclick="goHome()">
+      <h1 class="p_title">Select an Option:</h1>
+      <div id="list">
+        <form>
+          <div class="item">
+            <input type="radio" name="option" value="a" id="view">
+            <label for="view">View Current Questions</label><br>
+          </div>
+          <div class="item">
+            <input type="radio" name="option" value="b" id="prepare">
+            <label for="prepare">Prepare Quiz</label><br>
+          </div>
+          <div class="item">
+            <input type="radio" name="option" value="c" id="add_question">
+            <label for="add_question">Add Question</label><br>
+          </div>
+          <div class="item">
+            <input type="radio" name="option" value="d" id="add_custom">
+            <label for="add_custom">Add Custom Question</label><br>
+          </div>
+          <div class="item">
+            <input type="radio" name="option" value="e" id="remove_question">
+            <label for="remove_question">Remove Question</label><br>
+          </div>
+          <div class="item">
+            <input type="radio" name="option" value="f" id="statistics">
+            <label for="statistics">Display Statistics</label><br>
+          </div>
+
+          <div class="button-holder">
+            <button type="button" name="button" class="btn" onClick="validateForm()">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script rel="script" src="/scripts/editor_options.js"></script>
+</body>
+</html>

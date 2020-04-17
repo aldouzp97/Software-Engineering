@@ -28,9 +28,6 @@ app.use('/image', express.static('image'));
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
-app.get('/questionPool', (req, res) => {
-    res.sendFile(__dirname + '/pages/questionPool.html');
-});
 app.get('/questionPool/:quizId', (req, res) => {
     res.sendFile(__dirname + '/pages/questionPool.html');
 });
@@ -45,6 +42,9 @@ app.get('/previewQuiz/:quizId', (req, res) => {
 });
 app.get('/password', (req, res) => {
     res.sendFile(__dirname + '/pages/password.html');
+});
+app.get('/editor', (req, res) => {
+    res.sendFile(__dirname + '/pages/editor_options.html');
 });
 app.get('/chooseQuizToEdit', (req, res) => {
     res.sendFile(__dirname + '/pages/select_quiz/select_edit.html');
@@ -73,6 +73,14 @@ app.post('/add', (req, res) => {
     fs.writeFileSync('./scripts/questionList.txt', JSON.stringify(arr));
     res.send("ok");
 })
+
+// app.post('/remove/:indexId', (req, res) => {
+//     let arr = JSON.parse(fs.readFileSync('./scripts/questionList.txt').toString());
+//     arr.
+//     (new Question(req.body.question, req.body.answers, req.body.rightAns, req.body.uid));
+//     fs.writeFileSync('./scripts/questionList.txt', JSON.stringify(arr));
+//     res.send("ok");
+// })
 
 //listen
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));

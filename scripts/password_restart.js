@@ -29,10 +29,12 @@ function returnToHome() {
 
 function openEditor(quiz_number) {
   if (quiz_number === 1) {
-    window.location.href = "/questionPool/1";
+    // window.location.href = "/questionPool/1";
+    window.location.href = "/editor";
   }
 
   if (quiz_number === 2) {
-    window.location.href = "/questionPool/2";
+    // window.location.href = "/questionPool/2";
+    window.location.href = "/editor";
   }
 }
