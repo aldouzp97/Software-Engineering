@@ -153,6 +153,9 @@ app.get('/chooseQuizToEdit', (req, res) => {
 app.get('/chooseQuizToStart', (req, res) => {
     res.sendFile(__dirname + '/pages/select_quiz/select_start.html');
 });
+app.get('/startQuizOne', (req, res) => {
+    res.sendFile(__dirname + '/pages/Quizpage.html');
+});
 
 //post
 app.post('/questionList', (req, res) => {

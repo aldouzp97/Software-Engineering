@@ -1,34 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css"  href="../css/Quizpage.css"> 
-    <title>Quiz</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../css/Quizpage.css">
+  <title>Quiz Page</title>
+   <script src="scirpts/quizPage.js"></script>
 </head>
+
 <body>
-    <!--Left menu-->
-    <div class="leftmenu" >
-        <img class = "result" src="../image/correct.png" title="That's your result of the question.">
-        <img class = "result" src="../image/error.png" title="That's your result of the question.">
-        <img class = "result" src="../image/clean.png" title="That's your result of the question.">
-        <img class = "result" src="../image/clean.png" title="That's your result of the question.">
-        <img class = "result" src="../image/clean.png" title="That's your result of the question.">
-        <img class = "restartButton" src="../image/restart.png" alt= "Click to Restart the Quiz!" title= "Restart">
+  <!--Left menu-->
+  <div id="left-menu">
+    <div class="indicator">
+          <img class="result" src="../image/check.svg" title="Question 1 indicator">
     </div>
-    
-    <!--   Question and Answer  -->
-    </div class="QA"> 
-        <div class="questionTitle"> Number. The question ?</div>
+    <div class="indicator">
+          <img class="result" src="../image/close.svg" title="Question 2 indicator">
+    </div>
+    <div class="indicator">
+          <img class="result" src="../image/restart.svg" title="Question 3 indicator">
+    </div>
+    <div class="indicator">
+          <img class="result" src="../image/restart.svg" title="Question 4 indicator">
+    </div>
+    <div class="indicator">
+          <img class="result" src="../image/restart.svg" title="Question 5 indicator">
+    </div>
 
-        <div class = "option1"> A.   Answer  1</div>
-        
-        <div class = "option2"> B.   Answer  2</div>
-        
-        <div class = "option3"> C.   Answer  3</div>
-    <div>
+    <img class="restart-btn" src="../image/restart.svg" alt="Click to Restart the Quiz!" title="Restart">
+  </div>
 
-
+  <!--   Question and Answer  -->
+  <div id="main">
+    <div id="question"> Number. The question ?</div>
+    <div id="answer1" class="answer"> A. Answer 1</div>
+    <div id="answer2" class="answer"> B. Answer 2</div>
+    <div id="answer3" class="answer"> C. Answer 3</div>
+  </div>
 
 </body>
+
 </html>
