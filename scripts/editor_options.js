@@ -1,5 +1,3 @@
-// initOptions();
-
 function goHome() {
   window.location.href = "/";
 }
@@ -9,10 +7,11 @@ function addQuestion() {
 }
 
 
-// Used to check which element is pressed
+// Used to react to radio buttons.
 function validateForm() {
-  var radioButtons = document.getElementsByName("option");
+  let radioButtons = document.getElementsByName("option");
   let count = countChecked(radioButtons);
+  console.log(returnSelectedValue());
 
   if (count === 0) {
     alert("You need to select an option");
@@ -22,10 +21,14 @@ function validateForm() {
   }
 
   if (count === 1) {
-    alert("You have selected the one and only option: "+returnSelectedValue(radioButtons));
+    alert("You have selected the one and only option: "+returnSelectedValue());
+    if (returnSelectedValue() === "a") {
+      window.location.href = "/preview/" + getQuizNumber();
+    }
   }
 }
 
+// Count the number of radioButtons checked.
 function countChecked(radioButtons) {
   let count = 0;
   for(var i = 0; i < radioButtons.length; i++) {
@@ -36,32 +39,24 @@ function countChecked(radioButtons) {
   return count;
 }
 
-function returnSelectedValue(radioButtons) {
-  let selected_index = "";
+// Return the value of the radio button that's selected.
+function returnSelectedValue() {
+  let radioButtons = document.getElementsByName("option");
+  let selected_value = "";
   for(var i = 0; i < radioButtons.length; i++) {
     if(radioButtons[i].checked == true) {
-      selected_index = radioButtons[i].value;
+      console.log(radioButtons[i].value);
+      selected_value = radioButtons[i].value;
     }
   }
-  return selected_index;
+  return selected_value;
 }
 
-// function initOptions() {
-//   let list = [];
-//   list.forEach(function (item, index) {
-//     let p = document.createElement("p");
-//     p.setAttribute("class", "item_text");
-//     p.textContent = "Question: " + item.question;
-//
-//     let p2 = document.createElement("p");
-//     p2.setAttribute("class", "item_text");
-//     p2.textContent = "Right Answer: " + item.rightAns;
-//
-//     let div_item = document.createElement("div");
-//     div_item.setAttribute("class", "item")
-//     div_item.append(p, p2);
-//
-//     let list = document.getElementById("list");
-//     list.append(div_item);
-//   });
-// }
+function getQuizNumber() {
+  let pathArray = window.location.pathname.split("/");
+  let quizId=1;
+  if (pathArray[1] == "editor") {
+      quizId = pathArray[2];
+  }
+  return quizId;
+}
