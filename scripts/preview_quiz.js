@@ -19,7 +19,7 @@ getQuestionList();
 function getQuestionList() {
   let xhttp = new XMLHttpRequest();
   let pathArray = window.location.pathname.split("/");
-  let request_url = "http://localhost:3000/pool";
+  let request_url = "http://localhost:3000/quiz";
   if (pathArray[2] === "1") {
     request_url += 1
   } else {
@@ -34,13 +34,12 @@ function getQuestionList() {
 }
 
 function initList(res) {
-  var json_string=jsonFromCSV(res);
-  console.log(json_string);
-  let list = JSON.parse(json_string);
+  let questions = JSON.parse(res);
+  let list = questions.questions;
   list.forEach(function (item, index) {
     let p = document.createElement("p");
     p.setAttribute("class", "item_text");
-    p.textContent = item.quizId + "Question: " + item.question;
+    p.textContent = item.qid + " Question: " + item.question;
 
     let p2 = document.createElement("p");
     p2.setAttribute("class", "item_text");

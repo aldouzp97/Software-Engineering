@@ -167,6 +167,12 @@ app.post('/pool1', (req, res) => {
 app.post('/pool2', (req, res) => {
     res.send(fs.readFileSync('./assets/questions/pool_2.csv').toString());
 });
+app.post('/quiz1', (req, res) => {
+  res.send(fs.readFileSync('./assets/questions/quiz1.json').toString());
+});
+app.post('/quiz2', (req, res) => {
+  res.send(fs.readFileSync('./assets/questions/quiz2.json').toString());
+});
 
 app.post('/add', (req, res) => {
     let arr = JSON.parse(fs.readFileSync('./scripts/questionList.txt').toString());
