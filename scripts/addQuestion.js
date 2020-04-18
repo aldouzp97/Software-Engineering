@@ -30,7 +30,7 @@ function add(str) {
     xhttp.open('POST', "http://localhost:3000/add"+pathArray[2]);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.onload = function () {
-        window.location.replace("/editor/1");
+        window.location.replace("/editor/"+pathArray[2]);
     }
     xhttp.send(JSON.stringify(str));
 }
