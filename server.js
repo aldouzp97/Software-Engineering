@@ -129,7 +129,7 @@ app.get('/', (req, res) => {
 app.get('/questionPool/:quizId', (req, res) => {
     res.sendFile(__dirname + '/pages/questionPool.html');
 });
-app.get('/addQuestion', (req, res) => {
+app.get('/addQuestion/:quizId', (req, res) => {
     res.sendFile(__dirname + '/pages/addQuestion.html');
 });
 app.get('/prepareQuiz', (req, res) => {
@@ -182,14 +182,18 @@ app.post('/saveQuiz1', (req, res) => {
 app.post('/saveQuiz2', (req, res) => {
   let str = fs.readFileSync('./assets/questions/pool_2.csv').toString();
   saveQuiz(str,req.body,2);
-  res.send("ok")
+  res.send("ok");
 });
-app.post('/add', (req, res) => {
-    let arr = JSON.parse(fs.readFileSync('./scripts/questionList.txt').toString());
-    arr.push(new Question(req.body.question, req.body.answers, req.body.rightAns));
-    fs.writeFileSync('./scripts/questionList.txt', JSON.stringify(arr));
-    res.send("ok");
-})
+app.post('/add1', (req, res) => {
+  let qid=addQuestionToPool(req.body,1);
+  addQuestionToQuiz(qid,req.body, 1);
+  res.send("ok");
+});
+app.post('/add2', (req, res) => {
+  let qid=addQuestionToPool(req.body,2);
+  addQuestionToQuiz(qid,req.body, 2);
+  res.send("ok");
+});
 
 // TODO: Rework to add a custom question
 // app.post('/addcustom', (req, res) => {
@@ -209,6 +213,32 @@ app.post('/add', (req, res) => {
 
 //listen
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+
+function addQuestionToPool(req, index) {
+  let url;
+  if (index == 1) {
+    url = './assets/questions/pool_1.csv'
+  } else {
+    url = './assets/questions/pool_2.csv'
+  }
+  let str = fs.readFileSync(url).toString();
+  let qid = str.split("\r\n").length + 1;
+  str += "\r\n" + req[0] + "," + req[1][0] + "," + req[1][1] + "," + req[1][2] + "," + req[2] + "," + qid;
+  fs.writeFileSync(url, str);
+  return qid;
+}
+
+function addQuestionToQuiz(qid, req, index) {
+  let url;
+  if (index == 1) {
+    url = './assets/questions/quiz1.json'
+  } else {
+    url = './assets/questions/quiz2.json'
+  }
+  let quiz = JSON.parse(fs.readFileSync(url).toString());
+  quiz.questions.push(new Question(req[0], [req[1][0], req[1][1], req[1][2]], req[2], qid));
+  fs.writeFileSync(url, JSON.stringify(quiz));
+}
 
 function saveQuiz(str, indexes,quizId) {
   let quiz = new Quiz();

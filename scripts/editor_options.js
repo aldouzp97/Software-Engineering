@@ -1,9 +1,11 @@
+let pathArray = window.location.pathname.split("/");
+
 function goHome() {
   window.location.href = "/";
 }
 
 function addQuestion() {
-  window.location.href = "/addQuestion";
+  window.location.href = "/addQuestion/"+pathArray[2];
 }
 
 
@@ -27,9 +29,9 @@ function validateForm() {
     }else if (returnSelectedValue() === "b") {
       window.location.href = "/questionPool/"+getQuizNumber();
     }else if (returnSelectedValue() === "c") {
-
+      window.location.href = "/addQuestion/"+getQuizNumber();
     }else if (returnSelectedValue() === "d") {
-
+      window.location.href = "/addQuestion/"+getQuizNumber();
     }else if (returnSelectedValue() === "e") {
 
     }else if (returnSelectedValue() === "f") {
