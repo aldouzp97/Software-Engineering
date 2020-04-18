@@ -1,6 +1,6 @@
 let check = 1;
 
-function addQuestion() {
+function sendQuestionInformation() {
     let question = document.querySelector("#input_question").value;
     let answer1 = document.querySelector("#input_answer1").value;
     let answer2 = document.querySelector("#input_answer2").value;
@@ -20,8 +20,9 @@ function addQuestion() {
         rightAns = answer3;
     }
 
-    let q = new Question(question, [answer1, answer2, answer3], rightAns, 1);
-    add(JSON.stringify(q));
+
+    let q = [question, [answer1, answer2, answer3], rightAns];
+    add(q);
 }
 
 function add(str) {
@@ -29,7 +30,7 @@ function add(str) {
     xhttp.open('POST', "http://localhost:3000/add");
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.onload = function () {
-        window.location.replace("/questionPool");
+        window.location.replace("/editor/1");
     }
     xhttp.send(str);
 }
