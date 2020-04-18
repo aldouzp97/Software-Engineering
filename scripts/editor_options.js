@@ -24,6 +24,16 @@ function validateForm() {
     alert("You have selected the one and only option: "+returnSelectedValue());
     if (returnSelectedValue() === "a") {
       window.location.href = "/preview/" + getQuizNumber();
+    }else if (returnSelectedValue() === "b") {
+      window.location.href = "/questionPool/"+getQuizNumber();
+    }else if (returnSelectedValue() === "c") {
+
+    }else if (returnSelectedValue() === "d") {
+
+    }else if (returnSelectedValue() === "e") {
+
+    }else if (returnSelectedValue() === "f") {
+
     }
   }
 }

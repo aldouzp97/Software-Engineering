@@ -174,6 +174,16 @@ app.post('/quiz2', (req, res) => {
   res.send(fs.readFileSync('./assets/questions/quiz2.json').toString());
 });
 
+app.post('/saveQuiz1', (req, res) => {
+  let str = fs.readFileSync('./assets/questions/pool_1.csv').toString();
+  saveQuiz(str,req.body,1);
+  res.send("ok")
+});
+app.post('/saveQuiz2', (req, res) => {
+  let str = fs.readFileSync('./assets/questions/pool_2.csv').toString();
+  saveQuiz(str,req.body,2);
+  res.send("ok")
+});
 app.post('/add', (req, res) => {
     let arr = JSON.parse(fs.readFileSync('./scripts/questionList.txt').toString());
     arr.push(new Question(req.body.question, req.body.answers, req.body.rightAns));
@@ -199,3 +209,19 @@ app.post('/add', (req, res) => {
 
 //listen
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+
+function saveQuiz(str, indexes,quizId) {
+  let quiz = new Quiz();
+  let split = str.split('\r\n');
+  split.forEach(function (line, index) {
+    let items = line.split(',');
+    if (indexes.includes(items[5])) {
+      quiz.addQuestion(new Question(items[0], [items[1], items[2], items[3]], items[4], items[5]));
+    }
+  });
+  if (quizId == 1) {
+    fs.writeFileSync('./assets/questions/quiz1.json', JSON.stringify(quiz));
+  } else {
+    fs.writeFileSync('./assets/questions/quiz2.json', JSON.stringify(quiz));
+  }
+}
