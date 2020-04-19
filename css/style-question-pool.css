@@ -1,3 +1,4 @@
+/* css for the question pool */
 
 * {
     margin: 0px;
@@ -22,10 +23,6 @@ body {
     padding: 20px 0px;
 }
 
-#list {
-
-}
-
 .item {
     width: 100%;
     height: auto;
@@ -37,9 +34,25 @@ body {
     background-color: #EBCBCE;
 }
 
+.item_selected{
+    width: 100%;
+    height: auto;
+    color: #D73646;
+    padding-bottom: 30px;
+    background-color: #EBCBCE;
+}
+
 .item_text {
     padding-top: 30px;
     padding-left: 40px;
+}
+
+.item_check {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    margin-top: 30px;
+    right: 400px;
 }
 
 #add {
@@ -65,4 +78,19 @@ body {
 
 .close:hover{
     opacity: 0.6;
+}
+
+.btn {
+    background-color: white;
+    color: black;
+    font-size: 3vw;
+    border-radius: 20px;
+    margin: 4vh auto;
+    padding: 2vh 4vw;
+    display: block;
+}
+
+.btn:hover {
+    background-color: #DF5D65;
+    color: white;
 }

@@ -1,0 +1,29 @@
+/* CSS to style the text elements */
+
+.content {
+  height: auto;
+}
+
+.item {
+  width: 100%;
+  height: auto;
+  color: #D73646;
+  padding-bottom: 30px;
+}
+
+.item:hover {
+  background-color: #EBCBCE;
+}
+
+.item_text {
+  padding-top: 5px;
+}
+
+/* The button needs to be made static not to overlap the questions when resized */
+
+@media (max-width: 640px) {
+  .close {
+    display: block;
+    position: static;
+  }
+}

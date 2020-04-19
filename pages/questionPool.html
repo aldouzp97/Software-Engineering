@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Question Pool</title>
-    <link href="css/style-question-pool.css" type="text/css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Question Pool</title>
+  <link rel="stylesheet" type="text/css" href="/css/style-question-pool.css">
+  <link rel="stylesheet" type="text/css" href="/css/style-main.css">
 </head>
 <body>
 
-<div class="bg">
-    <a href="/"><img src="image/ic_close.png" class="close"></a>
-    <a href="/addQuestion"><img src="image/ic_add.png" alt="" id="add"></a>
+  <div class="bg">
+    <a href="/"><img src="/image/ic_close.png" class="close"></a>
+    <a href="/addQuestion"><img src="/image/ic_add.png" alt="" id="add"></a>
     <p id="p_title">Question Pool</p>
     <div id="list"></div>
-</div>
+    <input type="button" value="Confirm" class="btn" onclick="saveQuiz()">
+  </div>
 
-<script rel="script" src="scripts/questionPool.js"></script>
+  <script rel="script" src="/scripts/questionPool.js"></script>
 </body>
 </html>

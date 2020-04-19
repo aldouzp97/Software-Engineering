@@ -1,0 +1,113 @@
+/* Container for the page */
+
+.content {
+  position: relative;
+  background-color: white;
+  height: 100vh;
+  text-align: center;
+}
+
+/* Page Title */
+
+.p_title {
+    font-size: 5vw;
+    color: #D73646;
+    text-align: center;
+    padding: 20px 0px;
+}
+
+/* Add and Close Buttons */
+
+.add, .close {
+  position: absolute;
+  width:70px;
+  height:70px;
+}
+
+.add {
+    bottom:10px;
+    right:10px;
+}
+
+.add:hover {
+    opacity: 0.6;
+}
+
+.close {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.close:hover{
+    opacity: 0.6;
+}
+
+@media (max-width: 1260px) and (min-width: 640px) {
+  .p_title {
+    font-size: 7vw;
+  }
+}
+
+@media (min-width: 640px) {
+  .close {
+      left: 10px;
+      top: 10px;
+  }
+}
+
+@media (max-width: 640px) {
+  .p_title {
+    font-size: 48px;
+  }
+
+  .close {
+    margin: 0;
+    bottom:10px;
+    left:10px;
+  }
+}
+
+/* Form */
+
+form {
+  margin-top:45px;
+}
+
+/* Items that are added to the Page */
+
+.item {
+    width: 100%;
+    height: auto;
+    font-size: 30px;
+    color: #D73646;
+    padding: 30px 20px;
+}
+
+.item:hover {
+    background-color: #EBCBCE;
+}
+
+input[type=radio] {
+    width: 20px;
+    height: 20px;
+}
+
+
+/* Buttons */
+
+.btn {
+  margin-left: 20px;
+  font-size:36px;
+  border-radius:10px;
+  margin-top: 30px;
+  padding: 15px 20px;
+}
+
+.btn:hover {
+  background-color: #D73646;
+}
+
+.button-holder {
+  width:100%;
+  text-align: center;
+}
