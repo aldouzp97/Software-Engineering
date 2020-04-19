@@ -75,3 +75,42 @@ body {
   padding-bottom: 7%;
   padding-top: 7%;
 }
+
+#dialog {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: none;
+}
+
+.dialog {
+  width: 500px;
+  height: 200px;
+  background-color: #EBCBCE;
+  margin: 250px auto;
+  opacity: 0.9;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 60px;
+  color: #D73646;
+}
+
+#dialog_text {
+  display: block;
+  padding: 10px;
+}
+
+#dialog_btn {
+  background-color: white;
+  color: black;
+  font-size: 2vw;
+  border-radius: 20px;
+  margin: 4vh auto;
+  padding: 2vh 4vw;
+  display: block;
+}
+
+#dialog_btn:hover {
+  background-color: #DF5D65;
+  color: white;
+}

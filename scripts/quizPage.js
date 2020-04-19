@@ -1,3 +1,6 @@
+let questions;
+let nowQuestionIndex=0;
+
 function startQuizOne() {
   window.location.href = "/startQuizOne";
 }
@@ -27,7 +30,52 @@ var inactivityTime = function() {
   }
 }
 
+function getQuizQuestions() {
+  let xhttp = new XMLHttpRequest();
+  xhttp.open('POST', "http://localhost:3000/quiz1");
+  xhttp.onload = function () {
+    initList(this.response);
+  }
+  xhttp.send();
+}
+
+function initList(str) {
+  questions = JSON.parse(str).questions;
+  initQuestionAndAnswers();
+}
+
+function initQuestionAndAnswers() {
+  let q = questions[nowQuestionIndex];
+  document.getElementById("question").textContent=q.question;
+  document.getElementById("answer1").textContent=q.answers[0];
+  document.getElementById("answer2").textContent=q.answers[1];
+  document.getElementById("answer3").textContent=q.answers[2];
+}
+
+function selectAnswer(index) {
+  let indicator = document.getElementById("indicator" + nowQuestionIndex);
+  let q = questions[nowQuestionIndex];
+  if (q.answers[index] == q.rightAns) {
+    indicator.setAttribute("src", "/image/check.svg");
+  } else {
+    indicator.setAttribute("src", "/image/close.svg");
+  }
+  if (nowQuestionIndex <4) {
+    nowQuestionIndex++;
+    initQuestionAndAnswers();
+  } else {
+    let dialog = document.getElementById("dialog");
+    dialog.setAttribute("style", "display:block");
+  }
+}
+
+function finishQuiz() {
+  window.location.replace("/chooseQuizToStart");
+}
+
 window.addEventListener('load', function() {
   //console.log('All assets loaded')
   inactivityTime();
+
+  getQuizQuestions();
 });
