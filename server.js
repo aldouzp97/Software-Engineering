@@ -124,37 +124,37 @@ app.use('/image', express.static('image'));
 
 //get
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/index.html');
 });
 app.get('/questionPool/:quizId', (req, res) => {
-    res.sendFile(__dirname + '/pages/questionPool.html');
+  res.sendFile(__dirname + '/pages/question_pool.html');
 });
 app.get('/addQuestion/:quizId', (req, res) => {
-    res.sendFile(__dirname + '/pages/addQuestion.html');
+  res.sendFile(__dirname + '/pages/addQuestion.html');
 });
 app.get('/prepareQuiz', (req, res) => {
-    res.sendFile(__dirname + '/pages/prepareQuiz.html');
+  res.sendFile(__dirname + '/pages/prepareQuiz.html');
 });
 app.get('/previewQuiz/:quizId', (req, res) => {
-    res.sendFile(__dirname + '/pages/previewQuiz.html');
+  res.sendFile(__dirname + '/pages/previewQuiz.html');
 });
 app.get('/password', (req, res) => {
-    res.sendFile(__dirname + '/pages/password.html');
+  res.sendFile(__dirname + '/pages/password.html');
 });
 app.get('/editor/:quizId', (req, res) => {
-    res.sendFile(__dirname + '/pages/editor_options.html');
+  res.sendFile(__dirname + '/pages/editor_options.html');
 });
 app.get('/preview/:quizId', (req, res) => {
-    res.sendFile(__dirname + '/pages/preview_quiz.html');
+  res.sendFile(__dirname + '/pages/preview_quiz.html');
 });
 app.get('/chooseQuizToEdit', (req, res) => {
-    res.sendFile(__dirname + '/pages/select_quiz/select_edit.html');
+  res.sendFile(__dirname + '/pages/select_quiz/select_edit.html');
 });
 app.get('/chooseQuizToStart', (req, res) => {
-    res.sendFile(__dirname + '/pages/select_quiz/select_start.html');
+  res.sendFile(__dirname + '/pages/select_quiz/select_start.html');
 });
 app.get('/startQuizOne', (req, res) => {
-    res.sendFile(__dirname + '/pages/Quizpage.html');
+  res.sendFile(__dirname + '/pages/Quizpage.html');
 });
 app.get('/startQuizTwo', (req, res) => {
   res.sendFile(__dirname + '/pages/guessThePicture.html');
@@ -162,13 +162,13 @@ app.get('/startQuizTwo', (req, res) => {
 
 //post
 app.post('/questionList', (req, res) => {
-    res.send(fs.readFileSync('./scripts/questionList.txt').toString());
+  res.send(fs.readFileSync('./scripts/questionList.txt').toString());
 });
 app.post('/pool1', (req, res) => {
-    res.send(fs.readFileSync('./assets/questions/pool_1.csv').toString());
+  res.send(fs.readFileSync('./assets/questions/pool_1.csv').toString());
 });
 app.post('/pool2', (req, res) => {
-    res.send(fs.readFileSync('./assets/questions/pool_2.csv').toString());
+  res.send(fs.readFileSync('./assets/questions/pool_2.csv').toString());
 });
 app.post('/quiz1', (req, res) => {
   res.send(fs.readFileSync('./assets/questions/quiz1.json').toString());
@@ -176,7 +176,6 @@ app.post('/quiz1', (req, res) => {
 app.post('/quiz2', (req, res) => {
   res.send(fs.readFileSync('./assets/questions/quiz2.json').toString());
 });
-
 app.post('/saveQuiz1', (req, res) => {
   let str = fs.readFileSync('./assets/questions/pool_1.csv').toString();
   saveQuiz(str,req.body,1);
@@ -187,6 +186,7 @@ app.post('/saveQuiz2', (req, res) => {
   saveQuiz(str,req.body,2);
   res.send("ok");
 });
+
 app.post('/add1', (req, res) => {
   let qid=addQuestionToPool(req.body,1);
   addQuestionToQuiz(qid,req.body, 1);
@@ -197,22 +197,6 @@ app.post('/add2', (req, res) => {
   addQuestionToQuiz(qid,req.body, 2);
   res.send("ok");
 });
-
-// TODO: Rework to add a custom question
-// app.post('/addcustom', (req, res) => {
-//     let arr = JSON.parse(fs.readFileSync('./scripts/questionList.txt').toString());
-//     arr.push(new Question(req.body.question, req.body.answers, req.body.rightAns));
-//     fs.writeFileSync('./scripts/questionList.txt', JSON.stringify(arr));
-//     res.send("ok");
-// })
-
-// TODO: Rework to remove a question
-// app.post('/remove', (req, res) => {
-//     let arr = JSON.parse(fs.readFileSync('./scripts/questionList.txt').toString());
-//     arr.push(new Question(req.body.question, req.body.answers, req.body.rightAns));
-//     fs.writeFileSync('./scripts/questionList.txt', JSON.stringify(arr));
-//     res.send("ok");
-// })
 
 //listen
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
@@ -243,7 +227,7 @@ function addQuestionToQuiz(qid, req, index) {
   fs.writeFileSync(url, JSON.stringify(quiz));
 }
 
-function saveQuiz(str, indexes,quizId) {
+function saveQuiz(str, indexes, quizId) {
   let quiz = new Quiz();
   let split = str.split('\r\n');
   split.forEach(function (line, index) {

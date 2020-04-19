@@ -1,96 +1,40 @@
-/* css for the question pool */
+/* CSS to style the text elements */
 
-* {
-    margin: 0px;
-    padding: 0px;
-}
-
-body {
-    background-color: #efefef;
-}
-
-.bg {
-    width: 1024px;
-    height: auto;
-    background-color: white;
-    margin: 0px auto;
-}
-
-#p_title {
-    font-size: 50px;
-    color: #D73646;
-    text-align: center;
-    padding: 20px 0px;
+.content {
+  height: auto;
 }
 
 .item {
-    width: 100%;
-    height: auto;
-    color: #D73646;
-    padding-bottom: 30px;
+  width: 100%;
+  height: auto;
+  padding-bottom: 30px;
 }
 
 .item:hover {
-    background-color: #EBCBCE;
-}
-
-.item_selected{
-    width: 100%;
-    height: auto;
-    color: #D73646;
-    padding-bottom: 30px;
-    background-color: #EBCBCE;
+  background-color: #EBCBCE;
 }
 
 .item_text {
-    padding-top: 30px;
-    padding-left: 40px;
+  padding-top: 5px;
+  color: #D73646;
+  text-align: left;
 }
 
 .item_check {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    margin-top: 30px;
-    right: 400px;
+  width:60px;
+  float:right;
+  /* right:10px; */
+  padding-bottom: 20px;
 }
 
-#add {
-    width: 100px;
-    height: 100px;
-    position: fixed;
-    right: 25%;
-    bottom: 10%;
+.item_selected {
+  padding: 30px 20px;
+}
+
+/* The button needs to be made static not to overlap the questions when resized */
+
+@media (max-width: 640px) {
+  .close {
     display: block;
-}
-
-#add:hover {
-    opacity: 0.6;
-}
-
-.close {
-    width: 70px;
-    height: 70px;
-    position: absolute;
-    top: 3%;
-    left: 18%;
-}
-
-.close:hover{
-    opacity: 0.6;
-}
-
-.btn {
-    background-color: white;
-    color: black;
-    font-size: 3vw;
-    border-radius: 20px;
-    margin: 4vh auto;
-    padding: 2vh 4vw;
-    display: block;
-}
-
-.btn:hover {
-    background-color: #DF5D65;
-    color: white;
+  }
 }
