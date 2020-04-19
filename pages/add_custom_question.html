@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Question</title>
+  <link rel="stylesheet" type="text/css" href="/css/style-main.css">
+  <link rel="stylesheet" type="text/css" href="/css/style-editor-options.css">
+  <link rel="stylesheet" type="text/css" href="/css/style-add-custom-question.css">
+</head>
+<body>
+
+  <section>
+    <div class="container content bg">
+      <h1 class="p_title">Add Custom Question</h1>
+      <div id="list"></div>
+      <img src="/image/ic_close.png" class="close" onclick="goBack()">
+
+      <div class="question_and_answer">
+        <div class="question">
+          <label for="input_question" class="question_title">Question: </label><br>
+          <input type="text" placeholder="Enter question here..." id="input_question">
+        </div>
+
+        <div class="answer">
+          <label for="input_answer1" class="answer_title">Option A: </label>
+          <input type="text" placeholder="Enter answer here..." id="input_answer1">
+          <img src="/image/ic_check.png" onclick="check1()" id="img_check1">
+        </div>
+        <div class="answer">
+          <label for="input_answer2" class="answer_title">Option B: </label>
+          <input type="text" placeholder="Enter answer here..." id="input_answer2">
+          <img src="/image/ic_circle.png" onclick="check2()" id="img_check2">
+        </div>
+        <div class="answer">
+          <label for="input_answer3" class="answer_title">Option C: </label>
+          <input type="text" placeholder="Enter answer here..." id="input_answer3">
+          <img src="/image/ic_circle.png" onclick="check3()" id="img_check3">
+        </div>
+
+        <button class="btn" onclick="sendQuestionInformation()">Save</button>
+      </div>
+    </div>
+  </section>
+
+  <script rel="script" src="/scripts/add_custom_question.js"></script>
+</body>
+</html>

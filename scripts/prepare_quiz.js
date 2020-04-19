@@ -1,4 +1,3 @@
-
 let pathArray = window.location.pathname.split("/");
 
 getQuestionList();
@@ -18,7 +17,6 @@ function getQuestionList() {
 
 function initList(res) {
   var json_string=jsonFromCSV(res);
-  console.log(json_string);
   let list = JSON.parse(json_string);
   list.forEach(function (item, index) {
     let p = document.createElement("p");
@@ -38,7 +36,13 @@ function initList(res) {
     div_item.append(img_check,p, p2);
 
     div_item.addEventListener("click", function () {
-      addItemIntoWaitingList(item,div_item,img_check);
+      if (waitingList.length < 5) {
+        addItemIntoWaitingList(item,div_item,img_check);
+      } else if (waitingList.length===5 && waitingList.includes(item.qid)) {
+        addItemIntoWaitingList(item,div_item,img_check);
+      } else {
+        alert("You cannot add more than 5 questions to the quiz, please unselect one first.")
+      }
     });
 
     let list = document.getElementById("list");
@@ -90,7 +94,6 @@ function jsonFromCSV(response) {
     obj['answers'] = answers;
     obj['rightAns'] = currentline[4];
     obj['qid'] = currentline[5];
-    console.log(currentline[5])
     result.push(obj);
   }
   return JSON.stringify(result);

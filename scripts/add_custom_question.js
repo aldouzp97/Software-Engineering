@@ -58,12 +58,3 @@ function reset() {
     document.querySelector("#img_check2").setAttribute("src", "/image/ic_circle.png");
     document.querySelector("#img_check3").setAttribute("src", "/image/ic_circle.png");
 }
-
-class Question {
-    constructor(question, answers, rightAns, uid) {
-        this.question = question;
-        this.answers = answers;
-        this.rightAns = rightAns;
-        this.qid = uid;
-    }
-}
