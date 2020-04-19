@@ -1,26 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <link rel="stylesheet" href="style2.css">
+<head>
     <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <header>
-      <h1>Guess the Picture</h1>
-    </header>
-  <div class="wrapper">
-    <div class="first"><span class="dot"><p>1</p></span></div>
-    <div class="second"><span class="dot"><p>2</p></span></div>
-    <div class="third"><span class="dot"><p>3</p></span></div>
-    <div class="fourth"><span class="dot"><p>4</p></span></div>
-    <div class="fifth"><span class="dot"><p>5</p></span></div>
-  </div>
-    <div class="picAnswer">
-      <form>
-          <input type="text" name="fname" id="guess" style="color:#888;" value="Enter your answer here..." onfocus="inputFocus(this)" onblur="inputBlur(this)" />
-          <button onclick="answerGuess()" type="button" id="guess_button">Submit</button>
-      </form>
+    <link rel="stylesheet" href="/css/style-guess-picture.css">
+    <link rel="stylesheet" href="/css/style2.css">
+</head>
+<body>
+
+<div id="dialog">
+    <div class="dialog">
+      <div id="main">
+        <div id="question"> Number. The question ?</div>
+        <div id="answer1" class="answer" onclick="selectAnswer(0)"> A. Answer 1</div>
+        <div id="answer2" class="answer" onclick="selectAnswer(1)"> B. Answer 2</div>
+        <div id="answer3" class="answer" onclick="selectAnswer(2)"> C. Answer 3</div>
+      </div>
     </div>
-  </body>
+</div>
+
+<div class="body">
+    <header>
+        <h1>Guess the Picture</h1>
+    </header>
+
+    <div class="wrapper">
+        <div class="first" onclick="enterQuestion(0)" id="wrapper0"><span class="dot"><p>1</p></span></div>
+        <div class="second" onclick="enterQuestion(1)" id="wrapper1"><span class="dot"><p>2</p></span></div>
+        <div class="third" onclick="enterQuestion(2)" id="wrapper2"><span class="dot"><p>3</p></span></div>
+        <div class="fourth" onclick="enterQuestion(3)" id="wrapper3"><span class="dot"><p>4</p></span></div>
+        <div class="fifth" onclick="enterQuestion(4)" id="wrapper4"><span class="dot"><p>5</p></span></div>
+    </div>
+    <div class="picAnswer">
+        <form>
+            <input type="text" name="fname" id="guess" style="color:#888;" placeholder="Enter your answer here..."
+                   onfocus="inputFocus(this)" onblur="inputBlur(this)"/>
+            <button onclick="answerGuess()" type="button" id="guess_button">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" src="/scripts/guessPicture.js"></script>
+</body>
 </html>

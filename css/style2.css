@@ -1,32 +1,37 @@
 
-body{
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.body{
   margin: auto;
   width:60%;
 }
 
-header{
+header {
   text-align: center;
-  color: red;
-  font-size: 30px
+  color: #D73646;
+  font-size: 30px;
+  margin: 10px;
 }
 
 .wrapper{
-  background-image: url(wolf.jpg);
+  background-image: url(/image/wolf.jpg);
   background-repeat: no-repeat;
   background-size: 100%;
   display: inline-flex;
   width: 100%;
   text-align: center;
-  height: 600px;
+  height: 500px;
   border-style: solid;
-  color: red;
+  color: #D73646;
   font-size: 40px;
 }
 
 .first{
   width:20%;
-  background-color: red;
-
+  background-color: #D73646;
 }
 
 .second{
@@ -36,7 +41,7 @@ header{
 
 .third{
   width:20%;
-  background-color: red;
+  background-color: #D73646;
 }
 
 .fourth{
@@ -44,9 +49,9 @@ header{
   background-color: white;
 }
 
-.fifth{
-  width:20%;
-  background-color: red;
+.fifth {
+  width: 20%;
+  background-color: #D73646;
 }
 
 p{
@@ -69,12 +74,12 @@ p{
 }
 
 .second .dot p{
-  background-color: red;
+  background-color: #D73646;
   color: white;
 }
 
 .fourth .dot p{
-  background-color: red;
+  background-color: #D73646;
   color: white;
 }
 
@@ -103,10 +108,11 @@ select {
   width: 20%;
   float:right;
   color: white;
-  background-color: red;
+  background-color: #D73646;
   border-radius: 1px;
   border-width: 1px 1px 3px;
   text-align: center;
   font-style: normal;
   font-size: 20px
 }
+

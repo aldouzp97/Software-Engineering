@@ -5,6 +5,10 @@ function startQuizOne() {
   window.location.href = "/startQuizOne";
 }
 
+function startQuizTwo() {
+  window.location.href = "/startQuizTwo";
+}
+
 // Reset and automatic reset
 function reset() {
   window.location.href = "/";

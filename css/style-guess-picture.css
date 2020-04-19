@@ -1,0 +1,44 @@
+
+#dialog {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1000;
+    display: none;
+}
+
+.dialog {
+    width: 1024px;
+    height: 650px;
+    background-color: #EBCBCE;
+    margin: 30px auto;
+    opacity: 0.98;
+}
+
+#question {
+    padding-bottom: 7%;
+    padding-top: 7%;
+    font-size: 40px;
+    text-align: center;
+}
+
+.answer {
+    background: #D73646;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 3%;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 2.75vw;
+    padding: 1vw;
+}
+
+.answer:hover {
+    background: white;
+    color: #D73646;
+    border-style: solid;
+    border-color: #D73646;
+    border-width: 0.4vw;
+    cursor: pointer;
+}

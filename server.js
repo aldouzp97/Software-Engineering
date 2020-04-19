@@ -156,6 +156,9 @@ app.get('/chooseQuizToStart', (req, res) => {
 app.get('/startQuizOne', (req, res) => {
     res.sendFile(__dirname + '/pages/Quizpage.html');
 });
+app.get('/startQuizTwo', (req, res) => {
+  res.sendFile(__dirname + '/pages/guessThePicture.html');
+});
 
 //post
 app.post('/questionList', (req, res) => {
