@@ -79,7 +79,7 @@ function saveQuiz() {
 function jsonFromCSV(response) {
   var lines = response.split("\r\n");
   var result = [];
-  for (var i = 1; i < lines.length; i++) {
+  for (var i = 0; i < lines.length; i++) {
     var obj = {};
     var currentline = lines[i].split(",");
     var answers = [];
@@ -90,6 +90,7 @@ function jsonFromCSV(response) {
     obj['answers'] = answers;
     obj['rightAns'] = currentline[4];
     obj['qid'] = currentline[5];
+    console.log(currentline[5])
     result.push(obj);
   }
   return JSON.stringify(result);
