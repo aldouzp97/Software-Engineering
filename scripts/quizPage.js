@@ -1,12 +1,25 @@
 let questions;
 let nowQuestionIndex=0;
 
-function startQuizOne() {
-  window.location.href = "/startQuizOne";
+function startQuiz(quizId) {
+  let xhttp = new XMLHttpRequest();
+  xhttp.open('POST', "http://localhost:3000/quiz" + quizId);
+  xhttp.onload = function () {
+    if (JSON.parse(this.response).questions.length < 5) {
+      alert("Please prepare the quiz with 5 questions.");
+    } else {
+      if (quizId == 1) {
+        window.location.href = "/startQuizOne";
+      } else {
+        window.location.href = "/startQuizTwo";
+      }
+    }
+  }
+  xhttp.send();
 }
 
 function startQuizTwo() {
-  window.location.href = "/startQuizTwo";
+
 }
 
 // Reset and automatic reset
