@@ -1,3 +1,4 @@
+//Return to the homepage.
 function goHome() {
   window.location.href = "/";
 }
@@ -41,7 +42,7 @@ function goToPage(numberOfQuestions){
     }
   }else if (returnSelectedValue() === "b") {
     if (confirm("Doing this will overwrite the current question pool, are you ok with this?")) {
-      window.location.href = "/questionPool/"+getQuizNumber();
+      window.location.href = "/prepareQuiz/"+getQuizNumber();
     }
   }else if (returnSelectedValue() === "c") {
     if (numberOfQuestions === 5) {
@@ -91,7 +92,7 @@ function returnSelectedValue() {
   return selected_value;
 }
 
-//Return the currently selected quiz
+//Return the currently selected quiz.
 function getQuizNumber() {
   let pathArray = window.location.pathname.split("/");
   let quizId=1;

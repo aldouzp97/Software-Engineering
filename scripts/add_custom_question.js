@@ -1,6 +1,10 @@
 let pathArray = window.location.pathname.split("/");
 let check = 1;
 
+function goBack() {
+  window.location.href = "/editor/" + pathArray[2];
+}
+
 function sendQuestionInformation() {
     let question = document.querySelector("#input_question").value;
     let answer1 = document.querySelector("#input_answer1").value;
