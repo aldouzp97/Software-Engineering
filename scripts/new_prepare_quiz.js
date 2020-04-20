@@ -1,31 +1,34 @@
 let pathArray = window.location.pathname.split("/");
 
-getQuestionList();
+let title = document.getElementsByClassName("p_title");
+title[0].textContent = "Prepare Quiz " + getQuizNumber();
+let question_pool;
 
 function goBack() {
-  window.location.href = "/editor/" + pathArray[2];
+  window.location.href = "/editor/" + getQuizNumber();
 }
+
+getQuestionList();
 
 function getQuestionList() {
   let xhttp = new XMLHttpRequest();
-
-  let request_url = "http://localhost:3000/pool";
-  request_url += pathArray[2];
+  let pathArray = window.location.pathname.split("/");
+  let request_url = "http://localhost:3000/pool"+pathArray[2];
   xhttp.open('POST', request_url);
   xhttp.setRequestHeader("Content-type", "application/json");
   xhttp.onload = function () {
-    initList(this.response);
+    question_pool = JSON.parse(this.response);
+    initRadioList(this.response);
   }
   xhttp.send();
 }
 
-function initList(res) {
-  var json_string=jsonFromCSV(res);
-  let list = JSON.parse(json_string);
-  list.forEach(function (item, index) {
+function initRadioList(res) {
+  let questions = JSON.parse(res);
+  questions.forEach(function (item, index) {
     let p = document.createElement("p");
     p.setAttribute("class", "item_text");
-    p.textContent = "Question: " + item.question;
+    p.textContent = "Question " + item.qid + ": " + item.question;
 
     let p2 = document.createElement("p");
     p2.setAttribute("class", "item_text");
@@ -69,36 +72,35 @@ function addItemIntoWaitingList(item,div_item,img_check) {
   }
 }
 
-function saveQuiz() {
+function addToTempPool() {
   if (waitingList.length < 5) {
     alert("Please select at least 5 questions.");
     return
   }
+
+  let temp_pool=[];
+  for (var i=0; i<waitingList.length; i++) {
+    question_pool.forEach((question, index) => {
+      if (waitingList[i]===question.qid) {
+        temp_pool.push(question);
+      }
+    });
+  }
+
   let xhttp = new XMLHttpRequest();
-  let pathArray = window.location.pathname.split("/");
-  let request_url = "http://localhost:3000/saveQuiz";
-  request_url += pathArray[2];
+  let request_url = "http://localhost:3000/addToTempPool";
   xhttp.open('POST', request_url);
-  xhttp.setRequestHeader("Content-type", "application/json");
-  xhttp.send(JSON.stringify(waitingList));
-  window.location.replace("/editor/"+pathArray[2]);
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.onload = function () {
+    window.location.href = "/confirmQuiz/" + pathArray[2];
+  }
+  xhttp.send(JSON.stringify(temp_pool));
 }
 
-function jsonFromCSV(response) {
-  var lines = response.split("\r\n");
-  var result = [];
-  for (var i = 0; i < lines.length; i++) {
-    var obj = {};
-    var currentline = lines[i].split(",");
-    var answers = [];
-    answers.push(currentline[1]);
-    answers.push(currentline[2]);
-    answers.push(currentline[3]);
-    obj['question'] = currentline[0];
-    obj['answers'] = answers;
-    obj['rightAns'] = currentline[4];
-    obj['qid'] = currentline[5];
-    result.push(obj);
+function getQuizNumber() {
+  let quizId=1;
+  if (pathArray[1] == "preview") {
+      quizId = pathArray[2];
   }
-  return JSON.stringify(result);
+  return quizId;
 }

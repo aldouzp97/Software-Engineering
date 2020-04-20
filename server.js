@@ -122,17 +122,17 @@ app.use('/css', express.static('css'));
 app.use('/scripts', express.static('scripts'));
 app.use('/image', express.static('image'));
 
-// NAVIGATION
-// get
+// RETURN HOME
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-// password screen
+// PASSWORD SCREEN
 app.get('/password', (req, res) => {
   res.sendFile(__dirname + '/pages/password.html');
 });
 
+// OPENING EDITOR
 // choose the quiz editor you'd like to open
 app.get('/chooseQuizToEdit', (req, res) => {
   res.sendFile(__dirname + '/pages/select_quiz/select_edit.html');
@@ -142,13 +142,18 @@ app.get('/editor/:quizId', (req, res) => {
   res.sendFile(__dirname + '/pages/editor_options.html');
 });
 
+// CHOOSING WHAT TO EDIT
 // preview current quiz questions
 app.get('/preview/:quizId', (req, res) => {
   res.sendFile(__dirname + '/pages/preview_quiz.html');
 });
 // prepare the quiz
-app.get('/questionPool/:quizId', (req, res) => {
+app.get('/prepareQuiz/:quizId', (req, res) => {
   res.sendFile(__dirname + '/pages/prepare_quiz.html');
+});
+// confirm the quiz changes
+app.get('/confirmQuiz/:quizId', (req, res) => {
+  res.sendFile(__dirname + '/pages/confirm_quiz.html');
 });
 // add a question from pool
 app.get('/addQuestion/:quizId', (req, res) => {
@@ -174,10 +179,10 @@ app.get('/chooseQuizToStart', (req, res) => {
 
 // start a quiz
 app.get('/startQuizOne', (req, res) => {
-  res.sendFile(__dirname + '/pages/Quizpage.html');
+  res.sendFile(__dirname + '/pages/quiz_page.html');
 });
 app.get('/startQuizTwo', (req, res) => {
-  res.sendFile(__dirname + '/pages/guessThePicture.html');
+  res.sendFile(__dirname + '/pages/guess_quiz_page.html');
 });
 
 // finish quiz
@@ -208,19 +213,49 @@ app.post('/inpool2', (req, res) => {
   res.send(getQuestionsInQuiz(pool_url, quiz_url));
 });
 
+// Get all the questions from the pool for that quiz.
 app.post('/pool1', (req, res) => {
-  res.send(fs.readFileSync('./assets/questions/pool_1.csv').toString());
+  res.send(fs.readFileSync('./assets/questions/quiz_pool1.json').toString());
 });
 app.post('/pool2', (req, res) => {
-  res.send(fs.readFileSync('./assets/questions/pool_2.csv').toString());
+  res.send(fs.readFileSync('./assets/questions/quiz_pool2.json').toString());
 });
 
+// Get all the questions from the quiz currently.
 app.post('/quiz1', (req, res) => {
   res.send(fs.readFileSync('./assets/questions/quiz1.json').toString());
 });
 app.post('/quiz2', (req, res) => {
   res.send(fs.readFileSync('./assets/questions/quiz2.json').toString());
 });
+
+//add questions to temp pool before committing them
+app.post('/addToTempPool', (req, res) => {
+  addToTempPool(req.body);
+  res.send("ok");
+});
+
+//get temp pool
+app.post('/getTempPool', (req, res) => {
+  res.send(fs.readFileSync('./assets/questions/temporary.json').toString());
+});
+
+//commit the temp pool questions and make them the current quiz
+app.post('/commitTempPool1', (req, res) => {
+  commitTempToQuiz(req.body, 1);
+  res.send("ok");
+});
+
+//commit the temp pool questions and make them the current quiz
+app.post('/commitTempPool2', (req, res) => {
+  commitTempToQuiz(req.body, 2);
+  res.send("ok");
+});
+
+
+
+
+
 
 app.post('/saveQuiz1', (req, res) => {
   let str = fs.readFileSync('./assets/questions/pool_1.csv').toString();
@@ -273,6 +308,21 @@ app.post('/remove2', (req, res) => {
 
 //listen
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+
+function commitTempToQuiz(body, quizNumber){
+  let str = fs.readFileSync('./assets/questions/temporary.json').toString();
+  let parsed = JSON.parse(str);
+  fs.writeFileSync('./assets/questions/quiz' + quizNumber + '.json', JSON.stringify(parsed));
+}
+
+function addToTempPool(questions) {
+  tempquiz = new Quiz();
+  for(var i=0;i<questions.length;i++){
+    let q = questions[i];
+    tempquiz.addQuestion(q);
+  }
+  fs.writeFileSync('./assets/questions/temporary.json', JSON.stringify(tempquiz));
+}
 
 function getQuestionsNotInQuiz(pool_url, quiz_url) {
   let newpool = "";
@@ -372,7 +422,7 @@ function removeQuestionFromQuiz(qid, index) {
   for(var i = 0; i < quiz.questions.length; i++){
     console.log(quiz.questions[i].qid);
     console.log(parseInt(qid[0]));
-    if ( quiz.questions[i].qid === parseInt(qid[0])) {
+    if (parseInt(quiz.questions[i].qid) === parseInt(qid[0])) {
       quiz.questions.splice(i, 1);
       console.log("true");
     }

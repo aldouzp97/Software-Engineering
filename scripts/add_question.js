@@ -4,6 +4,10 @@ let question_pool;
 let question_pool_length;
 let question_to_add;
 
+function goBack() {
+  window.location.href = "/editor/" + pathArray[2];
+}
+
 // Load all questions from the question pool that aren't currently in the quiz.
 getQuestionList();
 getQuestionToAdd();

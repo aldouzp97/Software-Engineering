@@ -1,6 +1,10 @@
 let pathArray = window.location.pathname.split("/");
 let max_selected = 1;
 
+function goBack() {
+  window.location.href = "/editor/" + pathArray[2];
+}
+
 // Load all questions from the question pool that aren't currently in the quiz.
 getQuestionsInQuiz();
 
