@@ -2,7 +2,8 @@ let questions;
 let nowQuestionIndex=0;
 let resultArray=[];
 let seconds = 1;
-
+let answerPercent={};
+let buttonFlag = true;
 
 let countSeconds=setInterval(function () {
   seconds++;
@@ -75,28 +76,74 @@ function initQuestionAndAnswers() {
 }
 
 function selectAnswer(index) {
-  let result={}
-  let indicator = document.getElementById("indicator" + nowQuestionIndex);
+  if (!buttonFlag) {
+    return
+  }
+  let xhttp = new XMLHttpRequest();
+  xhttp.open('POST', "http://localhost:3000/getAnswerPercent");
+  xhttp.onload = function () {
+    answerPercent = JSON.parse(this.response);
+    handleSelectAnswer(index);
+  }
+  xhttp.setRequestHeader('Content-type', 'application/json');
+  xhttp.send(JSON.stringify({"qid": questions[nowQuestionIndex].qid}));
+}
+
+function handleSelectAnswer(index) {
   let q = questions[nowQuestionIndex];
+  let result = {}
+  let indicator = document.getElementById("indicator" + nowQuestionIndex);
+  let rightIndex=-1;
+  q.answers.forEach(function (item, index) {
+    if (item == q.rightAns) {
+      rightIndex = index;
+    }
+  });
+  result["result"] = index;
+  result["right"] = rightIndex;
   if (q.answers[index] == q.rightAns) {
     indicator.setAttribute("src", "/image/check.svg");
-    result["result"]="correct";
+    changeColor("green",index,q.answers[index]);
   } else {
     indicator.setAttribute("src", "/image/close.svg");
-    result["result"]="wrong";
+    changeColor("blue",index,q.answers[index]);
   }
-  if (nowQuestionIndex <4) {
-    nowQuestionIndex++;
-    initQuestionAndAnswers();
-  } else {
-    clearInterval(countSeconds);
-    let dialog = document.getElementById("dialog");
-    dialog.setAttribute("style", "display:block");
+
+  if (seconds < 1) {
+    seconds = 1;
   }
-  result["qid"]=q.qid;
-  result["time"]=seconds;
+  result["qid"] = q.qid;
+  result["time"] = seconds;
   resultArray.push(result);
-  seconds = 1;
+  seconds = 0;
+
+  buttonFlag = false;
+  setTimeout(function () {
+    changeColor("red",index,null);
+
+    if (nowQuestionIndex < 4) {
+      nowQuestionIndex++;
+      initQuestionAndAnswers();
+    } else {
+      clearInterval(countSeconds);
+      let dialog = document.getElementById("dialog");
+      dialog.setAttribute("style", "display:block");
+    }
+    buttonFlag = true;
+  }, 1000);
+}
+
+function changeColor(color, index, answer) {
+  let div_answer = document.getElementById("answer" + (index+1));
+  if (color == "green") {
+    div_answer.setAttribute("class", "answer bg_green");
+    div_answer.textContent = answer + " " + Math.round((answerPercent[index]+1) * 100 / (answerPercent["total"]+1)) + "% of participants";
+  } else if (color == "blue") {
+    div_answer.setAttribute("class", "answer bg_blue");
+    div_answer.textContent = answer + " " + Math.round((answerPercent[index]+1) * 100 / (answerPercent["total"]+1)) + "% of participants";
+  } else if (color == "red") {
+    div_answer.setAttribute("class", "answer bg_red");
+  }
 }
 
 function finishQuiz() {

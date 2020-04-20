@@ -50,6 +50,8 @@ body {
   font-size: 4vw;
 }
 
+
+
 .answer {
   background: #D73646;
   width: 80%;
@@ -69,6 +71,31 @@ body {
   border-color: #D73646;
   border-width: 0.4vw;
   cursor: pointer;
+}
+
+.bg_green {
+  background-color: #12C102;
+  color: white;
+}
+.bg_green:hover{
+  background-color: #12C102;
+  color: white;
+  border-color: #12C102;
+}
+
+.bg_blue {
+  background-color: #6000DB;
+  color: white;
+}
+.bg_blue:hover {
+  background-color: #6000DB;
+  color: white;
+  border-color: #6000DB;
+}
+
+.bg_red {
+  background-color: #D73646;
+  color: white;
 }
 
 #question {

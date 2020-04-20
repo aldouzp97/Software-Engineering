@@ -308,6 +308,12 @@ app.post('/saveResult2', (req, res) => {
   res.send("ok");
 });
 
+// Get question answers participants percent
+app.post('/getAnswerPercent', (req, res) => {
+  let answerPercent=getAnswerPercent(req.body,1);
+  res.send(answerPercent);
+});
+
 //listen
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
 
@@ -382,4 +388,21 @@ function saveResult(body,quizId) {
   let arr = JSON.parse(str);
   arr.push(body);
   fs.writeFileSync(url,JSON.stringify(arr));
+}
+
+function getAnswerPercent(body, quizId) {
+  let url = './assets/questions/result_quiz' + quizId + '.json';
+  let str = fs.readFileSync(url).toString();
+  let arr = JSON.parse(str);
+  let qid = body.qid;
+  let result = {"0": 0, "1": 0, "2": 0,"total":0};
+  arr.forEach(function (item, index) {
+    item.result.forEach(function (t, i) {
+      if (t.qid == qid) {
+        result[t.result]++;
+        result["total"]++;
+      }
+    });
+  });
+  return JSON.stringify(result);
 }
