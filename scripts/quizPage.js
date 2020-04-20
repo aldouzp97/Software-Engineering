@@ -1,5 +1,14 @@
 let questions;
 let nowQuestionIndex=0;
+let resultArray=[];
+let seconds = 1;
+
+
+let countSeconds=setInterval(function () {
+  seconds++;
+  let count = document.getElementById("count");
+  count.textContent = seconds + "s";
+}, 1000);
 
 function startQuiz(quizId) {
   let xhttp = new XMLHttpRequest();
@@ -16,10 +25,6 @@ function startQuiz(quizId) {
     }
   }
   xhttp.send();
-}
-
-function startQuizTwo() {
-
 }
 
 // Reset and automatic reset
@@ -70,24 +75,32 @@ function initQuestionAndAnswers() {
 }
 
 function selectAnswer(index) {
+  let result={}
   let indicator = document.getElementById("indicator" + nowQuestionIndex);
   let q = questions[nowQuestionIndex];
   if (q.answers[index] == q.rightAns) {
     indicator.setAttribute("src", "/image/check.svg");
+    result["result"]="correct";
   } else {
     indicator.setAttribute("src", "/image/close.svg");
+    result["result"]="wrong";
   }
   if (nowQuestionIndex <4) {
     nowQuestionIndex++;
     initQuestionAndAnswers();
   } else {
+    clearInterval(countSeconds);
     let dialog = document.getElementById("dialog");
     dialog.setAttribute("style", "display:block");
   }
+  result["qid"]=q.qid;
+  result["time"]=seconds;
+  resultArray.push(result);
+  seconds = 1;
 }
 
 function finishQuiz() {
-  window.location.replace("/chooseQuizToStart");
+  window.location.replace("/finishQuiz?resultArray="+JSON.stringify(resultArray));
 }
 
 window.addEventListener('load', function() {
