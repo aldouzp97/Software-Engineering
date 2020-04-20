@@ -139,7 +139,7 @@ app.get('/chooseQuizToEdit', (req, res) => {
 });
 // editor options screen
 app.get('/editor/:quizId', (req, res) => {
-  res.sendFile(__dirname + '/pages/editor_options.html');
+  res.sendFile(__dirname + '/pages/editor_menu.html');
 });
 
 // CHOOSING WHAT TO EDIT
@@ -153,31 +153,31 @@ app.get('/prepareQuiz/:quizId', (req, res) => {
 });
 // confirm the quiz changes
 app.get('/confirmQuiz/:quizId', (req, res) => {
-  res.sendFile(__dirname + '/pages/confirm_quiz.html');
+  res.sendFile(__dirname + '/pages/confirmation/confirm_quiz.html');
 });
 // confirm the quiz changes
 app.get('/confirmCustomQuiz/:quizId', (req, res) => {
-  res.sendFile(__dirname + '/pages/confirm_custom_quiz.html');
+  res.sendFile(__dirname + '/pages/confirmation/confirm_custom_quiz.html');
 });
 // choose what type of question you want to add
 app.get('/addChoice/:quizId', (req, res) => {
-  res.sendFile(__dirname + '/pages/add_choice.html');
+  res.sendFile(__dirname + '/pages/add_question/add_choice.html');
 });
 // preview questions in pool for pool question
 app.get('/previewAdd/:quizId', (req, res) => {
-  res.sendFile(__dirname + '/pages/add_preview.html');
+  res.sendFile(__dirname + '/pages/add_question/add_preview.html');
 });
 // preview questions in pool for custom question
 app.get('/previewAddCustom/:quizId', (req, res) => {
-  res.sendFile(__dirname + '/pages/add_custom_preview.html');
+  res.sendFile(__dirname + '/pages/add_question/add_custom_preview.html');
 });
 // add a question from pool
 app.get('/addQuestion/:quizId', (req, res) => {
-  res.sendFile(__dirname + '/pages/add_question.html');
+  res.sendFile(__dirname + '/pages/add_question/add_question.html');
 });
 // add a custom question to the pool (and quiz at the same time at the moment)
 app.get('/addCustomQuestion/:quizId', (req, res) => {
-  res.sendFile(__dirname + '/pages/add_custom_question.html');
+  res.sendFile(__dirname + '/pages/add_question/add_custom_question.html');
 });
 // remove question from current quiz
 app.get('/removeQuestion/:quizId', (req, res) => {

@@ -21,7 +21,6 @@ function getQuestionsInQuiz() {
 
 function initList(res) {
   let list = JSON.parse(res);
-  console.log(list);
   list.questions.forEach(function (item, index) {
     let p = document.createElement("p");
     p.setAttribute("class", "item_text");
@@ -67,7 +66,6 @@ function addItemIntoWaitingList(item,div_item,img_check) {
     div_item.setAttribute("class", "item");
     img_check.setAttribute("src", "/image/ic_circle.png");
   }
-  console.log(waitingList);
 }
 
 function removeQuestion() {
