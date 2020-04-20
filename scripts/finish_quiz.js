@@ -7,7 +7,7 @@ function initResultAndTime() {
     let totalRight = 0;
     let totalTime = 0;
     resultArray.forEach(function (item, index) {
-        if (item["result"]=="correct") {
+        if (item["result"]==item["right"]) {
             totalRight++;
         }
         totalTime += item["time"];
