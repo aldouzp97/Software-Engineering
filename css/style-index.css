@@ -20,6 +20,7 @@
   background-color: white;
   min-width: 160px;
   z-index: 1;
+  border-radius: 10px;
 }
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
@@ -54,7 +55,7 @@
 .img_logo {
     float: right;
     margin: 2vw;
-    width: 160px;
+    width: 150px;
 }
 
 @media (max-width: 1260px) and (min-width: 640px) {
@@ -96,6 +97,9 @@
     border-radius: 20px;
     margin: 4vh 0;
     padding: 2vh 4vw;
+    border: 0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
 }
 
 @media (max-width: 1260px) and (min-width: 640px) {
