@@ -180,6 +180,11 @@ app.get('/startQuizTwo', (req, res) => {
   res.sendFile(__dirname + '/pages/guessThePicture.html');
 });
 
+// finish quiz
+app.get('/finishQuiz', (req, res) => {
+  res.sendFile(__dirname + '/pages/finish_quiz.html');
+});
+
 //post
 app.post('/notinpool1', (req, res) => {
   let pool_url = "./assets/questions/pool_1.csv";
@@ -225,6 +230,15 @@ app.post('/saveQuiz1', (req, res) => {
 app.post('/saveQuiz2', (req, res) => {
   let str = fs.readFileSync('./assets/questions/pool_2.csv').toString();
   saveQuiz(str,req.body,2);
+  res.send("ok");
+});
+
+app.post('/saveResult1', (req, res) => {
+  saveResult(req.body,1);
+  res.send("ok");
+});
+app.post('/saveResult2', (req, res) => {
+  saveResult(req.body,2);
   res.send("ok");
 });
 
@@ -381,4 +395,12 @@ function saveQuiz(str, indexes, quizId) {
   } else {
     fs.writeFileSync('./assets/questions/quiz2.json', JSON.stringify(quiz));
   }
+}
+
+function saveResult(body,quizId) {
+  let url = './assets/questions/result_quiz'+quizId+'.json';
+  let str=fs.readFileSync(url).toString();
+  let arr = JSON.parse(str);
+  arr.push(body);
+  fs.writeFileSync(url,JSON.stringify(arr));
 }
