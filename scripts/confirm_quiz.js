@@ -57,6 +57,21 @@ function commitChanges() {
   }
 }
 
+function commitCustomChanges() {
+  if (confirm("Are you sure?")) {
+    let xhttp = new XMLHttpRequest();
+    let request_url = "http://localhost:3000/commitCustomTempPool" + pathArray[2];
+    xhttp.open('POST', request_url);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.onload = function () {
+      window.location.href = "/editor/" + pathArray[2];
+    }
+    xhttp.send();
+  } else {
+    window.location.href = "/editor/" + pathArray[2];
+  }
+}
+
 function getQuizNumber() {
   let quizId=1;
   if (pathArray[1] == "preview") {

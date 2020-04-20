@@ -31,10 +31,10 @@ function sendQuestionInformation() {
 
 function add(str) {
     let xhttp = new XMLHttpRequest();
-    xhttp.open('POST', "http://localhost:3000/add"+pathArray[2]);
+    xhttp.open('POST', "http://localhost:3000/addCustom"+pathArray[2]);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.onload = function () {
-        window.location.replace("/editor/"+pathArray[2]);
+        window.location.href = "/confirmCustomQuiz/"+pathArray[2];
     }
     xhttp.send(JSON.stringify(str));
 }

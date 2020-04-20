@@ -1,3 +1,4 @@
+let pathArray = window.location.pathname.split("/");
 let title = document.getElementsByClassName("p_title");
 title[0].textContent = "Preview Quiz " + getQuizNumber();
 
@@ -41,10 +42,17 @@ function initList(res) {
 }
 
 function getQuizNumber() {
-  let pathArray = window.location.pathname.split("/");
   let quizId=1;
   if (pathArray[1] == "preview") {
       quizId = pathArray[2];
   }
   return quizId;
+}
+
+function goToAdd() {
+  window.location.href = "/addQuestion/" + pathArray[2];
+}
+
+function goToAddCustom() {
+  window.location.href = "/addCustomQuestion/" + pathArray[2];
 }
