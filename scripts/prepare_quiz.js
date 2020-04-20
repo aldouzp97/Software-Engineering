@@ -98,7 +98,7 @@ function addToTempPool() {
 
 function getQuizNumber() {
   let quizId=1;
-  if (pathArray[1] == "preview") {
+  if (pathArray[1] == "prepareQuiz") {
       quizId = pathArray[2];
   }
   return quizId;
