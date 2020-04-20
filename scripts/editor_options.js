@@ -58,7 +58,7 @@ function goToPage(numberOfQuestions){
       window.location.href = "/removeQuestion/"+getQuizNumber();
     }
   }else if (returnSelectedValue() === "e") {
-    window.location.href = "/getStatistics/1";
+    window.location.href = "/getStatistics/"+getQuizNumber();
   }
 }
 
