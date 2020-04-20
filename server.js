@@ -202,7 +202,6 @@ app.get('/startQuizTwo', (req, res) => {
 });
 
 // finish quiz
-// finish quiz
 app.get('/finishQuiz', (req, res) => {
   res.sendFile(__dirname + '/pages/finish_quiz.html');
 });
@@ -299,6 +298,16 @@ app.post('/commitCustomTempPool2', (req, res) => {
   res.send("ok");
 });
 
+// Save quiz results
+app.post('/saveResult1', (req, res) => {
+  saveResult(req.body,1);
+  res.send("ok");
+});
+app.post('/saveResult2', (req, res) => {
+  saveResult(req.body,2);
+  res.send("ok");
+});
+
 //listen
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
 
@@ -365,4 +374,12 @@ function removeQuestionFromQuiz(qid, index) {
     }
   }
   fs.writeFileSync('./assets/questions/temporary.json', JSON.stringify(temp_quiz));
+}
+
+function saveResult(body,quizId) {
+  let url = './assets/questions/result_quiz'+quizId+'.json';
+  let str=fs.readFileSync(url).toString();
+  let arr = JSON.parse(str);
+  arr.push(body);
+  fs.writeFileSync(url,JSON.stringify(arr));
 }
