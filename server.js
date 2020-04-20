@@ -229,6 +229,14 @@ app.post('/quiz2', (req, res) => {
   res.send(fs.readFileSync('./assets/questions/quiz2.json').toString());
 });
 
+// Get all quiz results currently.
+app.post('/quizResult1', (req, res) => {
+  res.send(fs.readFileSync('./assets/questions/result_quiz1.json').toString());
+});
+app.post('/quizResult2', (req, res) => {
+  res.send(fs.readFileSync('./assets/questions/result_quiz2.json').toString());
+});
+
 //add questions to temp pool before committing them
 app.post('/addToTempPool', (req, res) => {
   addToTempPool(req.body);

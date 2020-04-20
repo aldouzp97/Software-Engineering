@@ -1,0 +1,37 @@
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.bg {
+    width: 1024px;
+    height: auto;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#title {
+    font-size: 60px;
+    color: #D73646;
+    padding: 10px;
+}
+
+#list div{
+    padding: 25px;
+}
+
+#list div:hover{
+    background-color: #EBCBCE;
+}
+
+#list p{
+    color: #D73646;
+    font-size: 20px;
+}
+
+#list span{
+    color: #D73646;
+    padding: 30px;
+    font-size: 20px;
+}

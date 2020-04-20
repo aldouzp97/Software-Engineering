@@ -65,7 +65,7 @@ function goToPage(numberOfQuestions){
       window.location.href = "/removeQuestion/"+getQuizNumber();
     }
   }else if (returnSelectedValue() === "f") {
-    window.location.href = "/";
+    window.location.href = "/getStatistics/1";
   }
 }
 

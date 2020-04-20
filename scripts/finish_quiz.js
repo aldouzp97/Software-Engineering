@@ -35,10 +35,10 @@ function saveQuizResult() {
     let request_url = "http://localhost:3000/saveResult1";
     xhttp.open('POST', request_url);
     xhttp.setRequestHeader("Content-type", "application/json");
-    resultArray.forEach(function (item,index) {
-        let n = item["time"];
-        item["time"]=""+n;
-    })
+    // resultArray.forEach(function (item,index) {
+    //     let n = item["time"];
+    //     item["time"]=""+n;
+    // })
     xhttp.send(JSON.stringify({"result": resultArray}));
 }
 
