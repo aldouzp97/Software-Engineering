@@ -20,7 +20,7 @@ function initList(res) {
                 resultArray[qid] = [];
                 timeArray[qid] = [];
             }
-            resultArray[qid].push(r["result"]);
+            resultArray[qid].push(r["result"]==r["right"]);
             timeArray[qid].push(r["time"]);
         })
     });
@@ -30,7 +30,7 @@ function initList(res) {
         let totalCorrect = 0;
         let totalTime = 0;
         item.forEach(function (r, i) {
-            if (r == "correct") {
+            if (r) {
                 totalCorrect++;
             }
             totalTime += timeArray[index][i];
