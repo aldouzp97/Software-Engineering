@@ -234,7 +234,7 @@ app.post('/addToTempPool', (req, res) => {
 //get temp pool
 app.post('/getTempPool', (req, res) => {
   res.send(fs.readFileSync('./assets/questions/temporary.json').toString());
-}
+});
 
 //return in question format
 app.post('/getNextID', (req, res) => {
