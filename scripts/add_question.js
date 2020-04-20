@@ -1,48 +1,44 @@
 let pathArray = window.location.pathname.split("/");
 let max_selected = 1;
 let question_pool;
-let question_pool_length;
-let question_to_add;
+let quiz_questions;
+let question_to_add = [];
 
 function goBack() {
   window.location.href = "/editor/" + pathArray[2];
 }
 
 // Load all questions from the question pool that aren't currently in the quiz.
-getQuestionList();
-getQuestionToAdd();
+getPoolQuestions();
+getQuizQuestions();
 
-function getQuestionToAdd() {
+function getPoolQuestions() {
   let xhttp = new XMLHttpRequest();
   let request_url = "http://localhost:3000/pool" + pathArray[2];
   xhttp.open('POST', request_url);
-  xhttp.setRequestHeader("Content-type", "text/csv");
+  xhttp.setRequestHeader("Content-type", "application/json");
   xhttp.onload = function () {
-    var json_string=jsonFromCSV(this.response);
-    question_pool = JSON.parse(json_string);
+    question_pool = JSON.parse(this.response);
   }
   xhttp.send();
 }
 
-function getQuestionList() {
+function getQuizQuestions() {
   let xhttp = new XMLHttpRequest();
-  let request_url = "http://localhost:3000/notinpool" + pathArray[2];
+  let request_url = "http://localhost:3000/quiz" + pathArray[2];
   xhttp.open('POST', request_url);
-  xhttp.setRequestHeader("Content-type", "text/csv");
+  xhttp.setRequestHeader("Content-type", "application/json");
   xhttp.onload = function () {
-    var json_string=jsonFromCSV(this.response);
-    questions_pool = JSON.parse(json_string);
-    initList(this.response);
+    quiz_questions = JSON.parse(this.response);
+    initList();
   }
   xhttp.send();
 }
 
-function initList(res) {
-  var json_string=jsonFromCSV(res);
-  console.log(json_string);
-  let list = JSON.parse(json_string);
-  console.log(list);
-  list.forEach(function (item, index) {
+function initList() {
+  let new_pool = getUnusedQuestions();
+  console.log(new_pool);
+  new_pool.forEach(function (item, index) {
     let p = document.createElement("p");
     p.setAttribute("class", "item_text");
     p.textContent = "Question: " + item.question;
@@ -74,23 +70,21 @@ function initList(res) {
   });
 }
 
-function jsonFromCSV(response) {
-  var lines = response.split("\r\n");
-  var result = [];
-  for (var i = 0; i < lines.length; i++) {
-    var obj = {};
-    var currentline = lines[i].split(",");
-    var answers = [];
-    answers.push(currentline[1]);
-    answers.push(currentline[2]);
-    answers.push(currentline[3]);
-    obj['question'] = currentline[0];
-    obj['answers'] = answers;
-    obj['rightAns'] = currentline[4];
-    obj['qid'] = currentline[5];
-    result.push(obj);
-  }
-  return JSON.stringify(result);
+function getUnusedQuestions(){
+  let new_pool = [];
+  let contains = false;
+  question_pool.forEach((pool_question, j) => {
+    quiz_questions.questions.forEach((question, i) => {
+      if (parseInt(question.qid) === parseInt(pool_question.qid)) {
+        contains = true;
+      }
+    });
+    if (contains === false) {
+      new_pool.push(pool_question);
+    }
+    contains = false;
+  });
+  return new_pool;
 }
 
 let waitingList = [];
@@ -106,7 +100,6 @@ function addItemIntoWaitingList(item,div_item,img_check) {
     div_item.setAttribute("class", "item");
     img_check.setAttribute("src", "/image/ic_circle.png");
   }
-  console.log(waitingList);
 }
 
 function addQuestion() {
@@ -115,18 +108,25 @@ function addQuestion() {
     return
   }
 
-  question_pool.forEach((item, index) => {
-    if (parseInt(item.qid) === parseInt(waitingList[0])) {
-      question_to_add = item;
+  //Add the existing questions to the new temporary pool
+  let temp_pool = [];
+  quiz_questions.questions.forEach((question, i) => {
+    temp_pool.push(question);
+  });
+
+  //Add the new question to the temporary pool
+  question_pool.forEach((question, index) => {
+    if (parseInt(question.qid) === parseInt(waitingList[0])) {
+      temp_pool.push(question);
     }
   });
-  let question = [question_to_add.question, question_to_add.answers, question_to_add.rightAns, question_to_add.qid];
 
   let xhttp = new XMLHttpRequest();
-  xhttp.open('POST', "http://localhost:3000/add"+pathArray[2]);
-  xhttp.setRequestHeader("Content-type", "application/json");
+  let request_url = "http://localhost:3000/addToTempPool";
+  xhttp.open('POST', request_url);
+  xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.onload = function () {
-    window.location.replace("/editor/"+pathArray[2]);
+    window.location.href = "/confirmQuiz/" + pathArray[2];
   }
-  xhttp.send(JSON.stringify(question));
+  xhttp.send(JSON.stringify(temp_pool));
 }

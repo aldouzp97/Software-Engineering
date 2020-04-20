@@ -49,22 +49,15 @@ function goToPage(numberOfQuestions){
       alert("Already have the maximum number of questions, please remove one before continuing.");
     }
     if (numberOfQuestions < 5) {
-      window.location.href = "/addQuestion/"+getQuizNumber();
+      window.location.href = "/addChoice/"+getQuizNumber();
     }
   }else if (returnSelectedValue() === "d") {
-    if (numberOfQuestions === 5) {
-      alert("Already have the maximum number of questions, please remove one before continuing.");
-    }
-    if (numberOfQuestions < 5) {
-      window.location.href = "/addCustomQuestion/"+getQuizNumber();
-    }
-  }else if (returnSelectedValue() === "e") {
     if (numberOfQuestions === 0) {
       alert("No questions currently in the pool");
     } else {
       window.location.href = "/removeQuestion/"+getQuizNumber();
     }
-  }else if (returnSelectedValue() === "f") {
+  }else if (returnSelectedValue() === "e") {
     window.location.href = "/";
   }
 }

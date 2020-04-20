@@ -10,7 +10,7 @@ getQuestionsInQuiz();
 
 function getQuestionsInQuiz() {
   let xhttp = new XMLHttpRequest();
-  let request_url = "http://localhost:3000/inpool" + pathArray[2];
+  let request_url = "http://localhost:3000/quiz" + pathArray[2];
   xhttp.open('POST', request_url);
   xhttp.setRequestHeader("Content-type", "text/csv");
   xhttp.onload = function () {
@@ -20,11 +20,9 @@ function getQuestionsInQuiz() {
 }
 
 function initList(res) {
-  var json_string=jsonFromCSV(res);
-  console.log(json_string);
-  let list = JSON.parse(json_string);
+  let list = JSON.parse(res);
   console.log(list);
-  list.forEach(function (item, index) {
+  list.questions.forEach(function (item, index) {
     let p = document.createElement("p");
     p.setAttribute("class", "item_text");
     p.textContent = "Question: " + item.question;
@@ -56,25 +54,6 @@ function initList(res) {
   });
 }
 
-function jsonFromCSV(response) {
-  var lines = response.split("\r\n");
-  var result = [];
-  for (var i = 0; i < lines.length; i++) {
-    var obj = {};
-    var currentline = lines[i].split(",");
-    var answers = [];
-    answers.push(currentline[1]);
-    answers.push(currentline[2]);
-    answers.push(currentline[3]);
-    obj['question'] = currentline[0];
-    obj['answers'] = answers;
-    obj['rightAns'] = currentline[4];
-    obj['qid'] = currentline[5];
-    result.push(obj);
-  }
-  return JSON.stringify(result);
-}
-
 let waitingList = [];
 
 function addItemIntoWaitingList(item,div_item,img_check) {
@@ -103,7 +82,7 @@ function removeQuestion() {
   xhttp.open('POST', "http://localhost:3000/remove"+pathArray[2]);
   xhttp.setRequestHeader("Content-type", "application/json");
   xhttp.onload = function () {
-    window.location.replace("/editor/"+pathArray[2]);
+    window.location.href = '/confirmQuiz/' + pathArray[2];
   }
   xhttp.send(JSON.stringify(question));
 }
