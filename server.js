@@ -201,6 +201,12 @@ app.get('/startQuizTwo', (req, res) => {
   res.sendFile(__dirname + '/pages/guess_quiz_page.html');
 });
 
+// finish quiz
+// finish quiz
+app.get('/finishQuiz', (req, res) => {
+  res.sendFile(__dirname + '/pages/finish_quiz.html');
+});
+
 // Get all the questions from the pool for that quiz.
 app.post('/pool1', (req, res) => {
   res.send(fs.readFileSync('./assets/questions/quiz_pool1.json').toString());
