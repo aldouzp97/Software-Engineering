@@ -314,6 +314,12 @@ app.post('/getAnswerPercent', (req, res) => {
   res.send(answerPercent);
 });
 
+// Get average completion time
+app.post('/getAverageTime', (req, res) => {
+  let averageTime=getAverageTime(1);
+  res.send(averageTime);
+});
+
 //listen
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
 
@@ -405,4 +411,18 @@ function getAnswerPercent(body, quizId) {
     });
   });
   return JSON.stringify(result);
+}
+
+function getAverageTime(quizId) {
+  let url = './assets/questions/result_quiz' + quizId + '.json';
+  let str = fs.readFileSync(url).toString();
+  let arr = JSON.parse(str);
+  let totalTime = 0;
+  arr.forEach(function (item, index) {
+    item.result.forEach(function (t, i) {
+      totalTime += t.time;
+    });
+  });
+  let count=arr.length;
+  return JSON.stringify({"averageTime": Math.round(totalTime/count)})
 }
