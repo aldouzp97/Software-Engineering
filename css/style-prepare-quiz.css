@@ -1,53 +1,34 @@
+/* CSS to style the text elements */
 
-* {
-    margin: 0px;
-    padding: 0px;
+.content {
+  height: auto;
 }
 
-body{
-    width: 100%;
-    height: 100%;
-    background-color: #efefef;
-    position: fixed;
+.item, .item_selected  {
+  width: 100%;
+  height: auto;
+  padding: 30px 20px;
 }
 
-.bg {
-    width: 1024px;
-    height: 100%;
-    margin: 0px auto;
-    background-color: white;
+.item:hover, .item_selected:hover {
+  background-color: #EBCBCE;
 }
 
-.close {
-    width: 70px;
-    height: 70px;
-    position: absolute;
-    top: 3%;
-    left: 20%;
+.item_text {
+  color: #D73646;
+  text-align: left;
 }
 
-.close:hover{
-    opacity: 0.6;
+.item_check {
+  width:60px;
+  vertical-align: middle;
+  float:right;
 }
 
-.title {
-    font-size: 50px;
-    color: #D73646;
-    text-align: center;
-    padding: 20px 0px;
-}
+/* The button needs to be made static not to overlap the questions when resized */
 
-.a_button {
-    display: table;
-    text-decoration: none;
-    background-color: #D73646;
-    color: white;
-    font-size: 40px;
-    border-radius: 20px;
-    padding: 20px 60px;
-    margin: 140px auto;
-}
-
-.a_button:hover{
-    opacity: 0.6;
+@media (max-width: 640px) {
+  .close {
+    display: block;
+  }
 }

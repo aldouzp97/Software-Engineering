@@ -122,123 +122,349 @@ app.use('/css', express.static('css'));
 app.use('/scripts', express.static('scripts'));
 app.use('/image', express.static('image'));
 
-//get
+// RETURN HOME
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
-app.get('/questionPool/:quizId', (req, res) => {
-  res.sendFile(__dirname + '/pages/question_pool.html');
-});
-app.get('/addQuestion/:quizId', (req, res) => {
-  res.sendFile(__dirname + '/pages/addQuestion.html');
-});
-app.get('/prepareQuiz', (req, res) => {
-  res.sendFile(__dirname + '/pages/prepareQuiz.html');
-});
-app.get('/previewQuiz/:quizId', (req, res) => {
-  res.sendFile(__dirname + '/pages/previewQuiz.html');
-});
+
+// PASSWORD SCREEN
 app.get('/password', (req, res) => {
   res.sendFile(__dirname + '/pages/password.html');
 });
-app.get('/editor/:quizId', (req, res) => {
-  res.sendFile(__dirname + '/pages/editor_options.html');
-});
-app.get('/preview/:quizId', (req, res) => {
-  res.sendFile(__dirname + '/pages/preview_quiz.html');
-});
+
+// OPENING EDITOR
+// choose the quiz editor you'd like to open
 app.get('/chooseQuizToEdit', (req, res) => {
   res.sendFile(__dirname + '/pages/select_quiz/select_edit.html');
 });
+// editor options screen
+app.get('/editor/:quizId', (req, res) => {
+  res.sendFile(__dirname + '/pages/editor_menu.html');
+});
+
+// CHOOSING WHAT TO EDIT
+// preview current quiz questions
+app.get('/preview/:quizId', (req, res) => {
+  res.sendFile(__dirname + '/pages/preview_quiz.html');
+});
+// prepare the quiz
+app.get('/prepareQuiz/:quizId', (req, res) => {
+  res.sendFile(__dirname + '/pages/prepare_quiz.html');
+});
+// confirm the quiz changes
+app.get('/confirmQuiz/:quizId', (req, res) => {
+  res.sendFile(__dirname + '/pages/confirmation/confirm_quiz.html');
+});
+// confirm the quiz changes
+app.get('/confirmCustomQuiz/:quizId', (req, res) => {
+  res.sendFile(__dirname + '/pages/confirmation/confirm_custom_quiz.html');
+});
+// choose what type of question you want to add
+app.get('/addChoice/:quizId', (req, res) => {
+  res.sendFile(__dirname + '/pages/add_question/add_choice.html');
+});
+// preview questions in pool for pool question
+app.get('/previewAdd/:quizId', (req, res) => {
+  res.sendFile(__dirname + '/pages/add_question/add_preview.html');
+});
+// preview questions in pool for custom question
+app.get('/previewAddCustom/:quizId', (req, res) => {
+  res.sendFile(__dirname + '/pages/add_question/add_custom_preview.html');
+});
+// add a question from pool
+app.get('/addQuestion/:quizId', (req, res) => {
+  res.sendFile(__dirname + '/pages/add_question/add_question.html');
+});
+// add a custom question to the pool (and quiz at the same time at the moment)
+app.get('/addCustomQuestion/:quizId', (req, res) => {
+  res.sendFile(__dirname + '/pages/add_question/add_custom_question.html');
+});
+// remove question from current quiz
+app.get('/removeQuestion/:quizId', (req, res) => {
+  res.sendFile(__dirname + '/pages/remove_question.html');
+});
+// add a custom question to the pool (and quiz at the same time at the moment)
+app.get('/getStatistics/:quizId', (req, res) => {
+  res.sendFile(__dirname + '/pages/statistics.html');
+});
+
+// choose quiz to start
 app.get('/chooseQuizToStart', (req, res) => {
   res.sendFile(__dirname + '/pages/select_quiz/select_start.html');
 });
+
+// start a quiz
 app.get('/startQuizOne', (req, res) => {
-  res.sendFile(__dirname + '/pages/Quizpage.html');
+  res.sendFile(__dirname + '/pages/quiz_page.html');
 });
 app.get('/startQuizTwo', (req, res) => {
-  res.sendFile(__dirname + '/pages/guessThePicture.html');
+  res.sendFile(__dirname + '/pages/guess_quiz_page.html');
 });
 
-//post
-app.post('/questionList', (req, res) => {
-  res.send(fs.readFileSync('./scripts/questionList.txt').toString());
+// finish quiz
+app.get('/finishQuiz', (req, res) => {
+  res.sendFile(__dirname + '/pages/finish_quiz.html');
 });
+
+// leader board
+app.get('/leaderBoard', (req, res) => {
+  res.sendFile(__dirname + '/pages/leader_board.html');
+});
+
+// Get all the questions from the pool for that quiz.
 app.post('/pool1', (req, res) => {
-  res.send(fs.readFileSync('./assets/questions/pool_1.csv').toString());
+  res.send(fs.readFileSync('./assets/questions/quiz_pool1.json').toString());
 });
 app.post('/pool2', (req, res) => {
-  res.send(fs.readFileSync('./assets/questions/pool_2.csv').toString());
+  res.send(fs.readFileSync('./assets/questions/quiz_pool2.json').toString());
 });
+
+// Get all the questions from the quiz currently.
 app.post('/quiz1', (req, res) => {
   res.send(fs.readFileSync('./assets/questions/quiz1.json').toString());
 });
 app.post('/quiz2', (req, res) => {
   res.send(fs.readFileSync('./assets/questions/quiz2.json').toString());
 });
-app.post('/saveQuiz1', (req, res) => {
-  let str = fs.readFileSync('./assets/questions/pool_1.csv').toString();
-  saveQuiz(str,req.body,1);
-  res.send("ok")
+
+// Get all quiz results currently.
+app.post('/quizResult1', (req, res) => {
+  res.send(fs.readFileSync('./assets/questions/result_quiz1.json').toString());
 });
-app.post('/saveQuiz2', (req, res) => {
-  let str = fs.readFileSync('./assets/questions/pool_2.csv').toString();
-  saveQuiz(str,req.body,2);
+app.post('/quizResult2', (req, res) => {
+  res.send(fs.readFileSync('./assets/questions/result_quiz2.json').toString());
+});
+
+//add questions to temp pool before committing them
+app.post('/addToTempPool', (req, res) => {
+  addToTempPool(req.body);
   res.send("ok");
 });
 
-app.post('/add1', (req, res) => {
-  let qid=addQuestionToPool(req.body,1);
-  addQuestionToQuiz(qid,req.body, 1);
+//get temp pool
+app.post('/getTempPool', (req, res) => {
+  res.send(fs.readFileSync('./assets/questions/temporary.json').toString());
+});
+
+//return in question format
+app.post('/getNextID', (req, res) => {
+  res.send(getNextID());
+});
+
+// ADDDDDDDDDD CUSTOM
+app.post('/addCustom1', (req, res) => {
+  addCustomQuestionTemp(req.body, 1);
   res.send("ok");
 });
-app.post('/add2', (req, res) => {
-  let qid=addQuestionToPool(req.body,2);
-  addQuestionToQuiz(qid,req.body, 2);
+app.post('/addCustom2', (req, res) => {
+  addCustomQuestionTemp(req.body, 2);
   res.send("ok");
+});
+
+// REMOOOOOVEEE
+app.post('/remove1', (req, res) => {
+  removeQuestionFromQuiz(req.body, 1);
+  res.send("ok");
+});
+app.post('/remove2', (req, res) => {
+  removeQuestionFromQuiz(req.body, 2);
+  res.send("ok");
+});
+
+//add questions to temp pool before committing them
+app.post('/addToTempPool', (req, res) => {
+  addToTempPool(req.body);
+  res.send("ok");
+});
+
+// WORKING WITH TEMPORARY POOL
+// get temp pool
+app.post('/getTempPool', (req, res) => {
+  res.send(fs.readFileSync('./assets/questions/temporary.json').toString());
+});
+// commit the temp pool questions and make them the current quiz
+app.post('/commitTempPool1', (req, res) => {
+  commitTempToQuiz(req.body, 1, false);
+  res.send("ok");
+});
+// commit the temp pool questions and make them the current quiz
+app.post('/commitTempPool2', (req, res) => {
+  commitTempToQuiz(req.body, 2, false);
+  res.send("ok");
+});
+// commit the temp pool questions and make them the current quiz
+app.post('/commitCustomTempPool1', (req, res) => {
+  commitTempToQuiz(req.body, 1, true);
+  res.send("ok");
+});
+// commit the temp pool questions and make them the current quiz
+app.post('/commitCustomTempPool2', (req, res) => {
+  commitTempToQuiz(req.body, 2, true);
+  res.send("ok");
+});
+
+// Save quiz results
+app.post('/saveResult1', (req, res) => {
+  saveResult(req.body,1);
+  res.send("ok");
+});
+app.post('/saveResult2', (req, res) => {
+  saveResult(req.body,2);
+  res.send("ok");
+});
+
+// Get question answers participants percent
+app.post('/getAnswerPercent', (req, res) => {
+  let answerPercent=getAnswerPercent(req.body,1);
+  res.send(answerPercent);
+});
+
+// Get average completion time
+app.post('/getAverageTime', (req, res) => {
+  let averageTime=getAverageTime(1);
+  res.send(averageTime);
+});
+
+// Get leader board
+app.post('/getLeaderBoard', (req, res) => {
+  let leaderBoard=getLeaderBoard(1);
+  res.send(leaderBoard);
 });
 
 //listen
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
 
-function addQuestionToPool(req, index) {
-  let url;
-  if (index == 1) {
-    url = './assets/questions/pool_1.csv'
-  } else {
-    url = './assets/questions/pool_2.csv'
-  }
-  let str = fs.readFileSync(url).toString();
-  let qid = str.split("\r\n").length + 1;
-  str += "\r\n" + req[0] + "," + req[1][0] + "," + req[1][1] + "," + req[1][2] + "," + req[2] + "," + qid;
-  fs.writeFileSync(url, str);
-  return qid;
+function getNextID(){
+  let current_questions = fs.readFileSync('./assets/questions/quiz_pool1.json').toString();
+  let parsed_questions = JSON.parse(current_questions);
+  return parsed_questions.length + 1;
 }
 
-function addQuestionToQuiz(qid, req, index) {
-  let url;
-  if (index == 1) {
-    url = './assets/questions/quiz1.json'
-  } else {
-    url = './assets/questions/quiz2.json'
+function commitTempToQuiz(body, quizNumber, custom){
+  let str = fs.readFileSync('./assets/questions/temporary.json').toString();
+  let parsed = JSON.parse(str);
+  fs.writeFileSync('./assets/questions/quiz' + quizNumber + '.json', JSON.stringify(parsed));
+
+  if (custom) {
+     let quiz_pool = JSON.parse(fs.readFileSync('./assets/questions/quiz_pool' + quizNumber + '.json').toString());
+     let last_question = parsed.questions.pop();
+     quiz_pool.push(last_question);
+     fs.writeFileSync('./assets/questions/quiz_pool' + quizNumber + '.json', JSON.stringify(quiz_pool));
   }
+}
+
+function addToTempPool(questions) {
+  tempquiz = new Quiz();
+  for(var i=0;i<questions.length;i++){
+    let q = questions[i];
+    tempquiz.addQuestion(q);
+  }
+  fs.writeFileSync('./assets/questions/temporary.json', JSON.stringify(tempquiz));
+}
+
+function createCurrentTempQuiz(url) {
   let quiz = JSON.parse(fs.readFileSync(url).toString());
-  quiz.questions.push(new Question(req[0], [req[1][0], req[1][1], req[1][2]], req[2], qid));
-  fs.writeFileSync(url, JSON.stringify(quiz));
+  let temp_quiz = new Quiz();
+  quiz.questions.forEach((question, index) => {
+    temp_quiz.addQuestion(question);
+  });
+  return temp_quiz;
 }
 
-function saveQuiz(str, indexes, quizId) {
-  let quiz = new Quiz();
-  let split = str.split('\r\n');
-  split.forEach(function (line, index) {
-    let items = line.split(',');
-    if (indexes.includes(items[5])) {
-      quiz.addQuestion(new Question(items[0], [items[1], items[2], items[3]], items[4], items[5]));
-    }
-  });
-  if (quizId == 1) {
-    fs.writeFileSync('./assets/questions/quiz1.json', JSON.stringify(quiz));
+function addCustomQuestionTemp(req, index) {
+  let quiz_url;
+  if (index == 1) {
+    quiz_url = './assets/questions/quiz1.json'
   } else {
-    fs.writeFileSync('./assets/questions/quiz2.json', JSON.stringify(quiz));
+    quiz_url = './assets/questions/quiz2.json'
   }
+  let temp_quiz = createCurrentTempQuiz(quiz_url);
+  temp_quiz.addQuestion(new Question(req[0], [req[1][0], req[1][1], req[1][2]], req[2], getNextID()));
+  fs.writeFileSync('./assets/questions/temporary.json', JSON.stringify(temp_quiz));
+}
+
+function removeQuestionFromQuiz(qid, index) {
+  let quiz_url;
+  if (index == 1) {
+    quiz_url = './assets/questions/quiz1.json'
+  } else {
+    quiz_url = './assets/questions/quiz2.json'
+  }
+  let temp_quiz = createCurrentTempQuiz(quiz_url);
+  for(var i = 0; i < temp_quiz.questions.length; i++){
+    if (parseInt(temp_quiz.questions[i].qid) === parseInt(qid[0])) {
+      temp_quiz.questions.splice(i, 1);
+    }
+  }
+  fs.writeFileSync('./assets/questions/temporary.json', JSON.stringify(temp_quiz));
+}
+
+function saveResult(body,quizId) {
+  let url = './assets/questions/result_quiz'+quizId+'.json';
+  let str=fs.readFileSync(url).toString();
+  let arr = JSON.parse(str);
+  arr.push(body);
+  fs.writeFileSync(url,JSON.stringify(arr));
+}
+
+function getAnswerPercent(body, quizId) {
+  let url = './assets/questions/result_quiz' + quizId + '.json';
+  let str = fs.readFileSync(url).toString();
+  let arr = JSON.parse(str);
+  let qid = body.qid;
+  let result = {"0": 0, "1": 0, "2": 0,"total":0};
+  arr.forEach(function (item, index) {
+    item.result.forEach(function (t, i) {
+      if (t.qid == qid) {
+        result[t.result]++;
+        result["total"]++;
+      }
+    });
+  });
+  return JSON.stringify(result);
+}
+
+function getAverageTime(quizId) {
+  let url = './assets/questions/result_quiz' + quizId + '.json';
+  let str = fs.readFileSync(url).toString();
+  let arr = JSON.parse(str);
+  let totalTime = 0;
+  arr.forEach(function (item, index) {
+    item.result.forEach(function (t, i) {
+      totalTime += t.time;
+    });
+  });
+  let count=arr.length;
+  return JSON.stringify({"averageTime": Math.round(totalTime/count)})
+}
+
+function getLeaderBoard(quizId) {
+  let url = './assets/questions/result_quiz' + quizId + '.json';
+  let str = fs.readFileSync(url).toString();
+  let arr = JSON.parse(str);
+  let leaderBoard=[];
+  arr.forEach(function (item, index) {
+    let user = {"user":item.user,"time":0};
+    item.result.forEach(function (t, i) {
+      user["time"]+=t.time;
+    });
+    leaderBoard.push(user);
+  });
+
+  leaderBoard = sortLeaderBoard(leaderBoard);
+
+  return JSON.stringify(leaderBoard);
+}
+
+function sortLeaderBoard(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i; j < arr.length-1; j++) {
+      if (arr[j].time > arr[j + 1].time) {
+        let temp=arr[j];
+        arr[j]=arr[j+1];
+        arr[j + 1] = temp;
+      }
+    }
+  }
+  return arr;
 }

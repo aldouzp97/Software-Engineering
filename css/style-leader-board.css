@@ -1,0 +1,33 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #D73646;
+}
+
+.bg {
+    width: 1024px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 60px;
+    color: white;
+    padding: 20px;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.item {
+    font-size: 40px;
+    color: white;
+    margin-left: 240px;
+}
+
+.p_time{
+    margin-left: 300px;
+}

@@ -1,0 +1,75 @@
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.bg {
+    width: 1024px;
+    height: auto;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#p0 {
+    font-size: 60px;
+    color: #D73646;
+    padding: 10px;
+}
+
+#p1 {
+    font-size: 40px;
+    padding: 5px;
+}
+
+#p2 {
+    font-size: 40px;
+    padding: 5px;
+}
+
+#p3 {
+    font-size: 30px;
+    color: #cccccc;
+    padding: 5px;
+}
+
+#p4 {
+    font-size: 50px;
+    padding: 30px;
+}
+
+.timePer {
+    width: 1024px;
+    height: 100px;
+    background-color: gray;
+    margin-top: 20px;
+}
+
+#btn {
+    width: 200px;
+    height: 90px;
+    background-color: #DF5D65;
+    font-size: 30px;
+    border-radius: 25px;
+   margin-top: 50px;
+}
+
+#btn:hover{
+    background-color: #D73646;
+}
+
+.quesTime {
+    width: 20%;
+    height: 100%;
+    background-color: #D73646;
+    float: left;
+    color: white;
+    font-size: 20px;
+    line-height: 95px;
+}
+
+#quesTime0{background-color: #D73646;}
+#quesTime1{background-color: #DA4F5D;}
+#quesTime2{background-color: #DF747F;}
+#quesTime3{background-color: #E38D95;}
+#quesTime4{background-color: #E6A6AC;}

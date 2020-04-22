@@ -1,13 +1,16 @@
-
 let pathArray = window.location.pathname.split("/");
+let max_selected = 1;
 
-getQuestionList();
+function goBack() {
+  window.location.href = "/editor/" + pathArray[2];
+}
 
-function getQuestionList() {
+// Load all questions from the question pool that aren't currently in the quiz.
+getQuestionsInQuiz();
+
+function getQuestionsInQuiz() {
   let xhttp = new XMLHttpRequest();
-
-  let request_url = "http://localhost:3000/pool";
-  request_url += pathArray[2];
+  let request_url = "http://localhost:3000/quiz" + pathArray[2];
   xhttp.open('POST', request_url);
   xhttp.setRequestHeader("Content-type", "text/csv");
   xhttp.onload = function () {
@@ -17,10 +20,8 @@ function getQuestionList() {
 }
 
 function initList(res) {
-  var json_string=jsonFromCSV(res);
-  console.log(json_string);
-  let list = JSON.parse(json_string);
-  list.forEach(function (item, index) {
+  let list = JSON.parse(res);
+  list.questions.forEach(function (item, index) {
     let p = document.createElement("p");
     p.setAttribute("class", "item_text");
     p.textContent = "Question: " + item.question;
@@ -38,7 +39,13 @@ function initList(res) {
     div_item.append(img_check,p, p2);
 
     div_item.addEventListener("click", function () {
-      addItemIntoWaitingList(item,div_item,img_check);
+      if (waitingList.length < max_selected) {
+        addItemIntoWaitingList(item,div_item,img_check);
+      } else if (waitingList.length===max_selected && waitingList.includes(item.qid)) {
+        addItemIntoWaitingList(item,div_item,img_check);
+      } else {
+        alert("You cannot add more than " + max_selected + " question to the quiz, please unselect one first.")
+      }
     });
 
     let list = document.getElementById("list");
@@ -61,37 +68,19 @@ function addItemIntoWaitingList(item,div_item,img_check) {
   }
 }
 
-function saveQuiz() {
-  if (waitingList.length < 5) {
-    alert("Please select at least 5 questions.");
+function removeQuestion() {
+  if (waitingList.length < max_selected) {
+    alert("Please select at least " + max_selected + " questions.");
     return
   }
-  let xhttp = new XMLHttpRequest();
-  let pathArray = window.location.pathname.split("/");
-  let request_url = "http://localhost:3000/saveQuiz";
-  request_url += pathArray[2];
-  xhttp.open('POST', request_url);
-  xhttp.setRequestHeader("Content-type", "application/json");
-  xhttp.send(JSON.stringify(waitingList));
-  window.location.replace("/editor/"+pathArray[2]);
-}
 
-function jsonFromCSV(response) {
-  var lines = response.split("\r\n");
-  var result = [];
-  for (var i = 0; i < lines.length; i++) {
-    var obj = {};
-    var currentline = lines[i].split(",");
-    var answers = [];
-    answers.push(currentline[1]);
-    answers.push(currentline[2]);
-    answers.push(currentline[3]);
-    obj['question'] = currentline[0];
-    obj['answers'] = answers;
-    obj['rightAns'] = currentline[4];
-    obj['qid'] = currentline[5];
-    console.log(currentline[5])
-    result.push(obj);
+  let question = [waitingList[0]];
+
+  let xhttp = new XMLHttpRequest();
+  xhttp.open('POST', "http://localhost:3000/remove"+pathArray[2]);
+  xhttp.setRequestHeader("Content-type", "application/json");
+  xhttp.onload = function () {
+    window.location.href = '/confirmQuiz/' + pathArray[2];
   }
-  return JSON.stringify(result);
+  xhttp.send(JSON.stringify(question));
 }

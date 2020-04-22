@@ -1,6 +1,10 @@
 let pathArray = window.location.pathname.split("/");
 let check = 1;
 
+function goBack() {
+  window.location.href = "/editor/" + pathArray[2];
+}
+
 function sendQuestionInformation() {
     let question = document.querySelector("#input_question").value;
     let answer1 = document.querySelector("#input_answer1").value;
@@ -27,10 +31,10 @@ function sendQuestionInformation() {
 
 function add(str) {
     let xhttp = new XMLHttpRequest();
-    xhttp.open('POST', "http://localhost:3000/add"+pathArray[2]);
+    xhttp.open('POST', "http://localhost:3000/addCustom"+pathArray[2]);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.onload = function () {
-        window.location.replace("/editor/"+pathArray[2]);
+        window.location.href = "/confirmCustomQuiz/"+pathArray[2];
     }
     xhttp.send(JSON.stringify(str));
 }
@@ -57,13 +61,4 @@ function reset() {
     document.querySelector("#img_check1").setAttribute("src", "/image/ic_circle.png");
     document.querySelector("#img_check2").setAttribute("src", "/image/ic_circle.png");
     document.querySelector("#img_check3").setAttribute("src", "/image/ic_circle.png");
-}
-
-class Question {
-    constructor(question, answers, rightAns, uid) {
-        this.question = question;
-        this.answers = answers;
-        this.rightAns = rightAns;
-        this.qid = uid;
-    }
 }

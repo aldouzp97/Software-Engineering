@@ -1,6 +1,6 @@
 let pathArray = window.location.pathname.split("/");
 let title = document.getElementsByClassName("p_title");
-title[0].textContent = "Preview Quiz " + getQuizNumber();
+title[0].textContent = "Confirm Changes To Quiz " + getQuizNumber();
 
 function goBack() {
   window.location.href = "/editor/" + getQuizNumber();
@@ -10,8 +10,7 @@ getQuestionList();
 
 function getQuestionList() {
   let xhttp = new XMLHttpRequest();
-  let pathArray = window.location.pathname.split("/");
-  let request_url = "http://localhost:3000/quiz"+pathArray[2];
+  let request_url = "http://localhost:3000/getTempPool";
   xhttp.open('POST', request_url);
   xhttp.setRequestHeader("Content-type", "application/json");
   xhttp.onload = function () {
@@ -22,7 +21,9 @@ function getQuestionList() {
 
 function initList(res) {
   let questions = JSON.parse(res);
+  console.log(questions);
   let list = questions.questions;
+  console.log(list);
   list.forEach(function (item, index) {
     let p = document.createElement("p");
     p.setAttribute("class", "item_text");
@@ -41,18 +42,40 @@ function initList(res) {
   });
 }
 
+function commitChanges() {
+  if (confirm("Are you sure?")) {
+    let xhttp = new XMLHttpRequest();
+    let request_url = "http://localhost:3000/commitTempPool" + pathArray[2];
+    xhttp.open('POST', request_url);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.onload = function () {
+      window.location.href = "/editor/" + pathArray[2];
+    }
+    xhttp.send();
+  } else {
+    window.location.href = "/editor/" + pathArray[2];
+  }
+}
+
+function commitCustomChanges() {
+  if (confirm("Are you sure?")) {
+    let xhttp = new XMLHttpRequest();
+    let request_url = "http://localhost:3000/commitCustomTempPool" + pathArray[2];
+    xhttp.open('POST', request_url);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.onload = function () {
+      window.location.href = "/editor/" + pathArray[2];
+    }
+    xhttp.send();
+  } else {
+    window.location.href = "/editor/" + pathArray[2];
+  }
+}
+
 function getQuizNumber() {
   let quizId=1;
   if (pathArray[1] == "preview") {
       quizId = pathArray[2];
   }
   return quizId;
-}
-
-function goToAdd() {
-  window.location.href = "/addQuestion/" + pathArray[2];
-}
-
-function goToAddCustom() {
-  window.location.href = "/addCustomQuestion/" + pathArray[2];
 }

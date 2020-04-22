@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 class Quiz {
   constructor() {
     this.questions = [];
@@ -117,6 +119,8 @@ question21 = new Question("Who does Mario save?", ["Sonic", "Princess Peach", "J
 question22 = new Question("What is arachnophobia?", ["Fear of spiders", "Fear of bears", "Fear of your parents"], "Fear of spiders", 2);
 question23 = new Question("When was the battle of hastings?", ["1914", "1066", "2020"], "1066", 3);
 
+quiz_pool1 = [];
+quiz_pool2 = [];
 quiz1 = new Quiz();
 quiz2 = new Quiz();
 temp_quiz = new Quiz();
@@ -130,19 +134,42 @@ quiz2.addQuestion(question21);
 quiz2.addQuestion(question22);
 quiz2.addQuestion(question23);
 
+var first_pool = fs.readFileSync('./assets/questions/pool_1.csv').toString();
+first_pool = first_pool.split("\r\n");
+first_pool.forEach((question, index) => {
+  let q = question.split(",");
+  quiz_pool1.push(new Question(q[0], [q[1], q[2], q[3]], q[4], q[5]));
+});
+
+var second_pool = fs.readFileSync('./assets/questions/pool_2.csv').toString();
+second_pool = second_pool.split("\r\n");
+second_pool.forEach((question, index) => {
+  let q = question.split(",");
+  quiz_pool2.push(new Question(q[0], [q[1], q[2], q[3]], q[4], q[5]));
+});
+
+var json_stringified_pool1 = JSON.stringify(quiz_pool1);
+var json_stringified_pool2 = JSON.stringify(quiz_pool2);
 var json_stringified_quiz1 = JSON.stringify(quiz1);
 var json_stringified_quiz2 = JSON.stringify(quiz2);
 var json_stringified_temp = JSON.stringify(temp_quiz);
 
-var fs = require('fs');
-fs.writeFile("../assets/questions/quiz1.json", json_stringified_quiz1, function(err, result) {
+fs.writeFile("./assets/questions/quiz_pool1.json", json_stringified_pool1, function(err, result) {
     if(err) console.log('error', err);
 });
 
-fs.writeFile("../assets/questions/quiz2.json", json_stringified_quiz2, function(err, result) {
+fs.writeFile("./assets/questions/quiz_pool2.json", json_stringified_pool2, function(err, result) {
     if(err) console.log('error', err);
 });
 
-fs.writeFile("../assets/questions/temporary.json", json_stringified_temp, function(err, result) {
+fs.writeFile("./assets/questions/quiz1.json", json_stringified_quiz1, function(err, result) {
+    if(err) console.log('error', err);
+});
+
+fs.writeFile("./assets/questions/quiz2.json", json_stringified_quiz2, function(err, result) {
+    if(err) console.log('error', err);
+});
+
+fs.writeFile("./assets/questions/temporary.json", json_stringified_temp, function(err, result) {
     if(err) console.log('error', err);
 });
