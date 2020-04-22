@@ -206,6 +206,11 @@ app.get('/finishQuiz', (req, res) => {
   res.sendFile(__dirname + '/pages/finish_quiz.html');
 });
 
+// leader board
+app.get('/leaderBoard', (req, res) => {
+  res.sendFile(__dirname + '/pages/leader_board.html');
+});
+
 // Get all the questions from the pool for that quiz.
 app.post('/pool1', (req, res) => {
   res.send(fs.readFileSync('./assets/questions/quiz_pool1.json').toString());
@@ -320,6 +325,12 @@ app.post('/getAverageTime', (req, res) => {
   res.send(averageTime);
 });
 
+// Get leader board
+app.post('/getLeaderBoard', (req, res) => {
+  let leaderBoard=getLeaderBoard(1);
+  res.send(leaderBoard);
+});
+
 //listen
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
 
@@ -425,4 +436,35 @@ function getAverageTime(quizId) {
   });
   let count=arr.length;
   return JSON.stringify({"averageTime": Math.round(totalTime/count)})
+}
+
+function getLeaderBoard(quizId) {
+  let url = './assets/questions/result_quiz' + quizId + '.json';
+  let str = fs.readFileSync(url).toString();
+  let arr = JSON.parse(str);
+  let leaderBoard=[];
+  arr.forEach(function (item, index) {
+    let user = {"user":item.user,"time":0};
+    item.result.forEach(function (t, i) {
+      user["time"]+=t.time;
+    });
+    leaderBoard.push(user);
+  });
+
+  leaderBoard = sortLeaderBoard(leaderBoard);
+
+  return JSON.stringify(leaderBoard);
+}
+
+function sortLeaderBoard(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i; j < arr.length-1; j++) {
+      if (arr[j].time > arr[j + 1].time) {
+        let temp=arr[j];
+        arr[j]=arr[j+1];
+        arr[j + 1] = temp;
+      }
+    }
+  }
+  return arr;
 }

@@ -18,7 +18,7 @@ function initResultAndTime() {
     let totalRight = 0;
     let totalTime = 0;
     resultArray.forEach(function (item, index) {
-        if (item["result"]==item["right"]) {
+        if (item["result"] == item["right"]) {
             totalRight++;
         }
         totalTime += item["time"];
@@ -41,11 +41,12 @@ function initResultAndTime() {
 }
 
 function saveQuizResult() {
+    let random = Math.round(Math.random() * 1000);
     let xhttp = new XMLHttpRequest();
     let request_url = "http://localhost:3000/saveResult1";
     xhttp.open('POST', request_url);
     xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(JSON.stringify({"result": resultArray}));
+    xhttp.send(JSON.stringify({"user": "user" + random, "result": resultArray}));
 }
 
 function back() {

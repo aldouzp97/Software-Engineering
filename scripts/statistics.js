@@ -20,7 +20,7 @@ function initList(res) {
                 resultArray[qid] = [];
                 timeArray[qid] = [];
             }
-            resultArray[qid].push(r["result"]==r["right"]);
+            resultArray[qid].push(r["result"] == r["right"]);
             timeArray[qid].push(r["time"]);
         })
     });
@@ -54,5 +54,8 @@ function initList(res) {
         let list = document.getElementById("list");
         list.append(div_item);
     })
+}
 
+function enterLeaderBoard() {
+    window.location.replace("/leaderBoard");
 }
