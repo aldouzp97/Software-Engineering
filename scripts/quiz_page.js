@@ -30,8 +30,9 @@ function startQuiz(quizId) {
 
 // Reset and automatic reset
 function reset() {
-  window.location.href = "/";
-  console.log("reset");
+  if (confirm("Are you sure to restart the quiz?")) {
+    window.location.href = "/";
+  }
 }
 
 var inactivityTime = function() {
