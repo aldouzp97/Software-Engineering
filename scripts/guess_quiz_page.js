@@ -61,11 +61,20 @@ function selectAnswer(index) {
 function answerGuess() {
     let guess = document.getElementById("guess").value;
     if (guess == "wolf") {
-        alert("Correct. This is a wolf.");
-        window.location.replace("/chooseQuizToStart");
+        let dialog = document.getElementById("dialog_finish");
+        dialog.setAttribute("style", "display:block");
     } else {
         alert("Wrong. Please try again.")
     }
+}
+
+function finishQuiz() {
+    let input_name = document.getElementById("input_name");
+    if (input_name.value == "") {
+        alert("Please enter your name.");
+        return
+    }
+    window.location.replace("/chooseQuizToStart");
 }
 
 function restart() {
