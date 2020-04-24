@@ -70,7 +70,7 @@ p{
   background-color: white;
   border-radius: 50%;
   position: absolute;
-  margin-top: 275px
+  margin-top: 230px
 }
 
 .second .dot p{
@@ -84,13 +84,10 @@ p{
 }
 
 .picAnswer{
-  margin-top: 5%;
+  margin-top: 3%;
 }
 
-form input[type="text"],
-textarea,
-select {
-  /* background: rgba(255,255,255,0); */
+#guess {
   border: none;
   font-size: 16px;
   margin-left: 5px;
@@ -98,21 +95,28 @@ select {
   padding-left: 10px;
   outline: 0;
   width: 75%;
-  background-color: #e8eeef;
-  color: #8a97a0;
-  box-shadow: 0 1px 0 rgb(0,0,0,0.3) inset;
+  background-color: #eeeeee;
+  color: black;
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-#guess_button{
+#guess_button {
   height: 50px;
   width: 20%;
-  float:right;
+  float: right;
   color: white;
   background-color: #D73646;
-  border-radius: 1px;
-  border-width: 1px 1px 3px;
+  border-radius: 10px;
   text-align: center;
   font-style: normal;
-  font-size: 20px
+  font-size: 20px;
+  border: 0;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#guess_button:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
