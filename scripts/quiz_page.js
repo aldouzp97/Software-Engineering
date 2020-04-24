@@ -147,7 +147,12 @@ function changeColor(color, index, answer) {
 }
 
 function finishQuiz() {
-  window.location.replace("/finishQuiz?resultArray="+JSON.stringify(resultArray));
+  let input_name = document.getElementById("input_name");
+  if (input_name.value == "") {
+    alert("Please enter your name.");
+    return
+  }
+  window.location.replace("/finishQuiz?resultArray="+JSON.stringify(resultArray)+"&username="+input_name.value);
 }
 
 window.addEventListener('load', function() {

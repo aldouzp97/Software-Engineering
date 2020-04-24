@@ -1,4 +1,5 @@
 let resultArray = JSON.parse(new URLSearchParams(window.location.search).get("resultArray"));
+let username = new URLSearchParams(window.location.search).get("username")
 
 getAverageTime();
 initResultAndTime();
@@ -46,7 +47,7 @@ function saveQuizResult() {
     let request_url = "http://localhost:3000/saveResult1";
     xhttp.open('POST', request_url);
     xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(JSON.stringify({"user": "user" + random, "result": resultArray}));
+    xhttp.send(JSON.stringify({"user": username, "result": resultArray}));
 }
 
 function back() {
