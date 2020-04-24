@@ -50,6 +50,10 @@ function saveQuizResult() {
     xhttp.send(JSON.stringify({"user": username, "result": resultArray}));
 }
 
+function enterLeaderBoard() {
+    window.location.replace("/leaderBoard");
+}
+
 function back() {
     window.location.replace("/chooseQuizToStart");
 }
