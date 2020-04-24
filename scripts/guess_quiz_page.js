@@ -53,3 +53,9 @@ function answerGuess() {
         alert("Wrong. Please try again.")
     }
 }
+
+function restart() {
+    if (confirm("Are you sure to restart the quiz?")) {
+        window.location.href = "/";
+    }
+}
