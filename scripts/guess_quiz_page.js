@@ -1,13 +1,9 @@
+let timeArray = [0, 0, 0, 0, 0];
+let count = 0;
+let countSeconds;
 let nowQuestionIndex = 0;
 
 getQuizQuestions();
-
-function enterQuestion(index) {
-    nowQuestionIndex = index;
-    let dialog = document.getElementById("dialog");
-    dialog.setAttribute("style", "display:block");
-    initQuestionAndAnswers();
-}
 
 function getQuizQuestions() {
     let xhttp = new XMLHttpRequest();
@@ -31,7 +27,25 @@ function initQuestionAndAnswers() {
     document.getElementById("answer3").textContent = q.answers[2];
 }
 
+function enterQuestion(index) {
+    nowQuestionIndex = index;
+    let dialog = document.getElementById("dialog");
+    dialog.setAttribute("style", "display:block");
+    initQuestionAndAnswers();
+
+    count = 1;
+    document.getElementById("timer").textContent = count + "s";
+    countSeconds = setInterval(function () {
+        count++;
+        let timer = document.getElementById("timer");
+        timer.textContent = count + "s";
+    }, 1000);
+}
+
 function selectAnswer(index) {
+    clearInterval(countSeconds);
+    timeArray[nowQuestionIndex] += count;
+
     let q = questions[nowQuestionIndex];
     if (q.answers[index] == q.rightAns) {
         alert("Correct");
