@@ -74,7 +74,7 @@ function finishQuiz() {
         alert("Please enter your name.");
         return
     }
-    window.location.replace("/chooseQuizToStart");
+    window.location.replace("/finishQuiz/2?resultArray="+JSON.stringify(resultArray)+"&username="+input_name.value);
 }
 
 function restart() {

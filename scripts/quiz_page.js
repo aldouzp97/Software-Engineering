@@ -153,7 +153,7 @@ function finishQuiz() {
     alert("Please enter your name.");
     return
   }
-  window.location.replace("/finishQuiz?resultArray="+JSON.stringify(resultArray)+"&username="+input_name.value);
+  window.location.replace("/finishQuiz/1?resultArray="+JSON.stringify(resultArray)+"&username="+input_name.value);
 }
 
 window.addEventListener('load', function() {

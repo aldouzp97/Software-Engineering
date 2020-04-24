@@ -202,7 +202,7 @@ app.get('/startQuizTwo', (req, res) => {
 });
 
 // finish quiz
-app.get('/finishQuiz', (req, res) => {
+app.get('/finishQuiz/:quizId', (req, res) => {
   res.sendFile(__dirname + '/pages/finish_quiz.html');
 });
 
@@ -444,22 +444,26 @@ function getLeaderBoard(quizId) {
   let arr = JSON.parse(str);
   let leaderBoard=[];
   arr.forEach(function (item, index) {
-    let user = {"user":item.user,"time":0};
+    let user = {"user":item.user,"time":0,"score":0};
+    let rightCount = 0;
     item.result.forEach(function (t, i) {
-      user["time"]+=t.time;
+      user.time+=t.time;
+      if (t.right==t.result) {
+        rightCount++;
+      }
     });
+    user.score = Math.round(rightCount / user.time * 100);
     leaderBoard.push(user);
   });
 
   leaderBoard = sortLeaderBoard(leaderBoard);
-
   return JSON.stringify(leaderBoard);
 }
 
 function sortLeaderBoard(arr) {
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < arr.length-1; j++) {
-      if (arr[j].time > arr[j + 1].time) {
+      if (arr[j].score < arr[j + 1].score) {
         let temp=arr[j];
         arr[j]=arr[j+1];
         arr[j + 1] = temp;
