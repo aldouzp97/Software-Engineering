@@ -30,8 +30,9 @@ function startQuiz(quizId) {
 
 // Reset and automatic reset
 function reset() {
-  window.location.href = "/";
-  console.log("reset");
+  if (confirm("Are you sure to restart the quiz?")) {
+    window.location.href = "/";
+  }
 }
 
 var inactivityTime = function() {
@@ -147,7 +148,12 @@ function changeColor(color, index, answer) {
 }
 
 function finishQuiz() {
-  window.location.replace("/finishQuiz?resultArray="+JSON.stringify(resultArray));
+  let input_name = document.getElementById("input_name");
+  if (input_name.value == "") {
+    alert("Please enter your name.");
+    return
+  }
+  window.location.replace("/finishQuiz/1?resultArray="+JSON.stringify(resultArray)+"&username="+input_name.value);
 }
 
 window.addEventListener('load', function() {

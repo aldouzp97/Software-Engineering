@@ -1,13 +1,9 @@
+let timeArray = [0, 0, 0, 0, 0];
+let count = 0;
+let countSeconds;
 let nowQuestionIndex = 0;
 
 getQuizQuestions();
-
-function enterQuestion(index) {
-    nowQuestionIndex = index;
-    let dialog = document.getElementById("dialog");
-    dialog.setAttribute("style", "display:block");
-    initQuestionAndAnswers();
-}
 
 function getQuizQuestions() {
     let xhttp = new XMLHttpRequest();
@@ -31,7 +27,25 @@ function initQuestionAndAnswers() {
     document.getElementById("answer3").textContent = q.answers[2];
 }
 
+function enterQuestion(index) {
+    nowQuestionIndex = index;
+    let dialog = document.getElementById("dialog");
+    dialog.setAttribute("style", "display:block");
+    initQuestionAndAnswers();
+
+    count = 1;
+    document.getElementById("timer").textContent = count + "s";
+    countSeconds = setInterval(function () {
+        count++;
+        let timer = document.getElementById("timer");
+        timer.textContent = count + "s";
+    }, 1000);
+}
+
 function selectAnswer(index) {
+    clearInterval(countSeconds);
+    timeArray[nowQuestionIndex] += count;
+
     let q = questions[nowQuestionIndex];
     if (q.answers[index] == q.rightAns) {
         alert("Correct");
@@ -47,9 +61,24 @@ function selectAnswer(index) {
 function answerGuess() {
     let guess = document.getElementById("guess").value;
     if (guess == "wolf") {
-        alert("Correct. This is a wolf.");
-        window.location.replace("/chooseQuizToStart");
+        let dialog = document.getElementById("dialog_finish");
+        dialog.setAttribute("style", "display:block");
     } else {
         alert("Wrong. Please try again.")
+    }
+}
+
+function finishQuiz() {
+    let input_name = document.getElementById("input_name");
+    if (input_name.value == "") {
+        alert("Please enter your name.");
+        return
+    }
+    window.location.replace("/finishQuiz/2?resultArray="+JSON.stringify(resultArray)+"&username="+input_name.value);
+}
+
+function restart() {
+    if (confirm("Are you sure to restart the quiz?")) {
+        window.location.href = "/";
     }
 }

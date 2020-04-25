@@ -111,10 +111,10 @@ body {
 }
 
 .dialog {
-  width: 500px;
-  height: 200px;
+  width: 600px;
+  height: 300px;
   background-color: #EBCBCE;
-  margin: 250px auto;
+  margin: 200px auto;
   opacity: 0.9;
   border-radius: 10px;
   text-align: center;
@@ -124,7 +124,7 @@ body {
 
 #dialog_text {
   display: block;
-  padding: 10px;
+  padding-top: 10px;
 }
 
 #dialog_btn {
@@ -150,4 +150,14 @@ body {
   position: fixed;
   right: 10px;
   color: #D73646;
+}
+
+#input_name {
+  width: 400px;
+  height: 30px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 30px;
+  padding: 20px;
+  outline: none;
 }

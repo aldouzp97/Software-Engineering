@@ -1,4 +1,27 @@
-getQuizResult();
+getQuestions();
+
+let questions;
+
+function getQuestions() {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open('POST', "http://localhost:3000/pool1");
+    xhttp.onload = function () {
+        questions = JSON.parse(this.response);
+        getQuizResult();
+    }
+    xhttp.send();
+}
+
+function getQuestion(qid) {
+    let q;
+    questions.forEach(function (item, index) {
+        if (item.qid == qid) {
+            q = item;
+        }
+    });
+    return q;
+}
+
 let resultArray = [];
 let timeArray = [];
 
@@ -39,8 +62,13 @@ function initList(res) {
         let correctPercent = Math.round(totalCorrect * 100 / item.length);
         let averageTime = Math.round(totalTime / item.length);
 
+        let q = getQuestion(index);
+
         let p1 = document.createElement("p");
-        p1.textContent = "Question " + index + ":";
+        p1.textContent = "Question " + index + ": " + q.question;
+
+        let p_ans = document.createElement("p");
+        p_ans.textContent = "Right Answer: " + q.rightAns;
 
         let p2 = document.createElement("span");
         p2.textContent = "Correct Percent: " + correctPercent + "%";
@@ -49,7 +77,7 @@ function initList(res) {
         p3.textContent = " Average Time: " + averageTime + " seconds";
 
         let div_item = document.createElement("div");
-        div_item.append(p1, p2, p3);
+        div_item.append(p1, p_ans, p2, p3);
 
         let list = document.getElementById("list");
         list.append(div_item);
