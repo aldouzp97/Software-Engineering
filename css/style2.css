@@ -11,9 +11,14 @@
 
 header {
   text-align: center;
+<<<<<<< HEAD
+  color: purple;
+  font-size: 30px
+=======
   color: #D73646;
   font-size: 30px;
   margin: 10px;
+>>>>>>> 917e0b249bd5b96c4df7117bec3c1fd9275df49b
 }
 
 .wrapper{
@@ -25,23 +30,36 @@ header {
   text-align: center;
   height: 500px;
   border-style: solid;
+<<<<<<< HEAD
+  color: purple;
+=======
   color: #D73646;
+>>>>>>> 917e0b249bd5b96c4df7117bec3c1fd9275df49b
   font-size: 40px;
 }
 
 .first{
   width:20%;
+<<<<<<< HEAD
+  background-color: purple;
+
+=======
   background-color: #D73646;
+>>>>>>> 917e0b249bd5b96c4df7117bec3c1fd9275df49b
 }
 
 .second{
   width:20%;
-  background-color: white
+  /* background-color: white */
 }
 
 .third{
   width:20%;
+<<<<<<< HEAD
+  /* background-color: purple; */
+=======
   background-color: #D73646;
+>>>>>>> 917e0b249bd5b96c4df7117bec3c1fd9275df49b
 }
 
 .fourth{
@@ -49,9 +67,15 @@ header {
   background-color: white;
 }
 
+<<<<<<< HEAD
+.fifth{
+  width:20%;
+  background-color: purple;
+=======
 .fifth {
   width: 20%;
   background-color: #D73646;
+>>>>>>> 917e0b249bd5b96c4df7117bec3c1fd9275df49b
 }
 
 p{
@@ -74,12 +98,20 @@ p{
 }
 
 .second .dot p{
+<<<<<<< HEAD
+  background-color: purple;
+=======
   background-color: #D73646;
+>>>>>>> 917e0b249bd5b96c4df7117bec3c1fd9275df49b
   color: white;
 }
 
 .fourth .dot p{
+<<<<<<< HEAD
+  background-color: purple;
+=======
   background-color: #D73646;
+>>>>>>> 917e0b249bd5b96c4df7117bec3c1fd9275df49b
   color: white;
 }
 
@@ -106,8 +138,17 @@ p{
   width: 20%;
   float: right;
   color: white;
+<<<<<<< HEAD
+  background-color: purple;
+=======
   background-color: #D73646;
+<<<<<<< HEAD
+>>>>>>> 917e0b249bd5b96c4df7117bec3c1fd9275df49b
+  border-radius: 1px;
+  border-width: 1px 1px 3px;
+=======
   border-radius: 10px;
+>>>>>>> df732d422a1fb04799a302cca59a5d47830b1137
   text-align: center;
   font-style: normal;
   font-size: 20px;
