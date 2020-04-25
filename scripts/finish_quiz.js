@@ -34,10 +34,10 @@ function initResultAndTime() {
         document.getElementById("p2").textContent = "You completed the quiz in: " + m + " minutes " + s + " seconds";
     }
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < resultArray.length; i++) {
         let t = resultArray[i]["time"] * 100 / totalTime;
-        document.getElementById("quesTime" + i).setAttribute("style", "width:" + t + "%");
-        document.getElementById("quesTime" + i).textContent = "Q" + (i + 1) + ": " + Math.round(t) + "%";
+        document.getElementById("quesTime" + i).setAttribute("style", "width:" + t + "%;display:inline");
+        document.getElementById("quesTime" + i).textContent = "Q" + (resultArray[i].index + 1) + ": " + Math.round(t) + "%";
     }
 }
 

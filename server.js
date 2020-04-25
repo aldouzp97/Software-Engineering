@@ -403,8 +403,16 @@ function saveResult(body,quizId) {
   let url = './assets/questions/result_quiz'+quizId+'.json';
   let str=fs.readFileSync(url).toString();
   let arr = JSON.parse(str);
-  arr.push(body);
-  fs.writeFileSync(url,JSON.stringify(arr));
+  let exist = false;
+  arr.forEach(function (item, index) {
+    if (item.user == body.user) {
+      exist = true;
+    }
+  });
+  if (!exist) {
+    arr.push(body);
+    fs.writeFileSync(url,JSON.stringify(arr));
+  }
 }
 
 function getAnswerPercent(body, quizId) {

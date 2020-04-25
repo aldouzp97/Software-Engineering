@@ -2,6 +2,7 @@ let timeArray = [0, 0, 0, 0, 0];
 let count = 0;
 let countSeconds;
 let nowQuestionIndex = 0;
+let resultArray=[];
 
 getQuizQuestions();
 
@@ -47,10 +48,27 @@ function selectAnswer(index) {
     timeArray[nowQuestionIndex] += count;
 
     let q = questions[nowQuestionIndex];
+
+    let rightIndex=0;
+    q.answers.forEach(function (item, index) {
+        if (item == q.rightAns) {
+            rightIndex = index;
+        }
+    });
+
     if (q.answers[index] == q.rightAns) {
         alert("Correct");
         let wrap = document.getElementById("wrapper" + nowQuestionIndex);
         wrap.setAttribute("style", "opacity:0");
+
+        let result = {};
+        result.result=index;
+        result.right = rightIndex;
+        result.qid = q.qid;
+        result.time = timeArray[nowQuestionIndex];
+        result.index = nowQuestionIndex;
+        resultArray.push(result);
+
     } else {
         alert('Wrong')
     }
@@ -59,6 +77,10 @@ function selectAnswer(index) {
 }
 
 function answerGuess() {
+    if (resultArray.length < 1) {
+        alert("Please answer the question first.");
+        return
+    }
     let guess = document.getElementById("guess").value;
     if (guess == "wolf") {
         let dialog = document.getElementById("dialog_finish");
