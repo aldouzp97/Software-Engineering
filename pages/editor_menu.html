@@ -5,40 +5,25 @@
   <title>Question Pool</title>
   <link rel="stylesheet" type="text/css" href="/css/style-main.css">
   <link rel="stylesheet" type="text/css" href="/css/style-editor-options.css">
+  <link rel="stylesheet" type="text/css" href="/css/style-checks.css">
 </head>
 <body>
 
   <section>
     <div class="container content">
-      <img src="/image/ic_close.png" class="close" onclick="goHome()">
-      <h1 class="p_title">Select an Option:</h1>
-      <div id="list">
-        <form>
-          <div class="item">
-            <input type="radio" name="option" value="a" id="view">
-            <label for="view">View Current Questions</label><br>
-          </div>
-          <div class="item">
-            <input type="radio" name="option" value="b" id="prepare">
-            <label for="prepare">Prepare Quiz</label><br>
-          </div>
-          <div class="item">
-            <input type="radio" name="option" value="c" id="add_question">
-            <label for="add_question">Add Question</label><br>
-          </div>
-          <div class="item">
-            <input type="radio" name="option" value="d" id="remove_question">
-            <label for="remove_question">Remove Question</label><br>
-          </div>
-          <div class="item">
-            <input type="radio" name="option" value="e" id="statistics">
-            <label for="statistics">Display Statistics</label><br>
-          </div>
+      <div class="new_back">
+        <img src="/image/ic_back.png" class="back" onclick="anotherQuiz()">
+      </div>
 
-          <div class="button-holder">
-            <button type="button" name="button" class="btn" onClick="validateForm()">Submit</button>
-          </div>
-        </form>
+      <img src="/image/ic_close.png" class="close" onclick="goHome()">
+
+      <h1 class="p_title"></h1>
+      <h2>Choose what you'd like to do with the quiz:</h2>
+      <div id="list"></div>
+      <div class="footer group">
+        <div class="button-holder">
+          <button type="button" name="button" class="btn" onClick="validateForm()">Submit</button>
+        </div>
       </div>
     </div>
   </section>

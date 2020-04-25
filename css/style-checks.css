@@ -1,0 +1,40 @@
+/* CSS to style the text elements */
+
+.content {
+  height: auto;
+}
+
+.item, .item_selected  {
+  width: 100%;
+  height: 75px;
+  vertical-align: middle;
+}
+
+.item:hover, .item_selected:hover {
+  background-color: #EBCBCE;
+}
+
+.item_text {
+  color: #D73646;
+  text-align: left;
+  padding-top: 30px;
+  padding-left: 20px;
+}
+
+.item_check {
+  width:60px;
+  float:right;
+}
+
+.item_check {
+    margin: 7px 20px 0 0;
+    padding:0;
+}
+
+/* The button needs to be made static not to overlap the questions when resized */
+
+@media (max-width: 640px) {
+  .close {
+    display: block;
+  }
+}
