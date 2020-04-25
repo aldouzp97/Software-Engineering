@@ -30,7 +30,20 @@ body{
 }
 
 #list {
-    width: 770px;
+    width: 800px;
     height: auto;
-    margin: 0 auto;
+    margin-left: 200px;
+}
+
+#img_back {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    margin-left: 130px;
+    margin-top: 30px;
+}
+
+#img_back:hover {
+    cursor: pointer;
+    opacity: 0.3;
 }

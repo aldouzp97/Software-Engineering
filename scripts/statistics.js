@@ -1,3 +1,4 @@
+let pathArray = window.location.pathname.split("/");
 getQuestions();
 
 let questions;
@@ -85,5 +86,9 @@ function initList(res) {
 }
 
 function enterLeaderBoard() {
-    window.location.replace("/leaderBoard");
+    window.location.href = "/leaderBoard";
+}
+
+function back() {
+    window.location.replace("/editor/"+pathArray[2]);
 }

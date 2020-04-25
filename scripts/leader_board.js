@@ -38,3 +38,7 @@ function initList(arr) {
         document.getElementById("list").append(div_item);
     })
 }
+
+function back() {
+    history.back();
+}
