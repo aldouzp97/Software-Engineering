@@ -25,9 +25,12 @@ body{
 .item {
     font-size: 40px;
     color: white;
-    margin-left: 240px;
+    width: 250px;
+    display: inline-block;
 }
 
-.p_time{
-    margin-left: 300px;
+#list {
+    width: 770px;
+    height: auto;
+    margin: 0 auto;
 }

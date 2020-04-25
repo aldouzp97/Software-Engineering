@@ -7,9 +7,18 @@
 </head>
 <body>
 
+<div id="dialog_finish">
+    <div class="dialog_finish">
+        <span id="dialog_text">Correct!</span>
+        <input type="text" id="input_name" placeholder="Enter your name here">
+        <input type="button" value="ok" onclick="finishQuiz()" id="dialog_btn">
+    </div>
+</div>
+
 <div id="dialog">
     <div class="dialog">
       <div id="main">
+        <span id="timer">1s</span>
         <div id="question"> Number. The question ?</div>
         <div id="answer1" class="answer" onclick="selectAnswer(0)"> A. Answer 1</div>
         <div id="answer2" class="answer" onclick="selectAnswer(1)"> B. Answer 2</div>
@@ -19,6 +28,7 @@
 </div>
 
 <div class="body">
+    <img src="/image/restart%20_red.svg" id="img_restart" onclick="restart()">
     <header>
         <h1>Guess the Picture</h1>
     </header>
@@ -31,11 +41,17 @@
         <div class="fifth" onclick="enterQuestion(4)" id="wrapper4"><span class="dot"><p>5</p></span></div>
     </div>
     <div class="picAnswer">
+<<<<<<< HEAD
+      <form>
+          <input type="text" name="fname" id="guess" style="color:#888;" placeholder= "Enter your answer here..." onfocus="inputFocus(this)" onblur="inputBlur(this)" />
+          <button onclick="answerGuess()" type="button" id="guess_button">Submit</button>
+      </form>
+=======
         <form>
-            <input type="text" name="fname" id="guess" style="color:#888;" placeholder="Enter your answer here..."
-                   onfocus="inputFocus(this)" onblur="inputBlur(this)"/>
+            <input type="text" name="fname" id="guess" placeholder="Enter your answer here..."/>
             <button onclick="answerGuess()" type="button" id="guess_button">Submit</button>
         </form>
+>>>>>>> 917e0b249bd5b96c4df7117bec3c1fd9275df49b
     </div>
 </div>
 
