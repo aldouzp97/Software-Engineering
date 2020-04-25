@@ -3,6 +3,7 @@ let count = 0;
 let countSeconds;
 let nowQuestionIndex = 0;
 let resultArray=[];
+let attemptArray = [0,0,0,0,0];
 
 getQuizQuestions();
 
@@ -29,6 +30,12 @@ function initQuestionAndAnswers() {
 }
 
 function enterQuestion(index) {
+    if (attemptArray[index] >= 5) {
+        alert("Sorry, you have tried too many times.");
+        return
+    }
+    attemptArray[index]++;
+
     nowQuestionIndex = index;
     let dialog = document.getElementById("dialog");
     dialog.setAttribute("style", "display:block");
