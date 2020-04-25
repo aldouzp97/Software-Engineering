@@ -1,5 +1,5 @@
 let pathArray = window.location.pathname.split("/");
-let check = 1;
+let check;
 
 function goBack() {
   window.location.href = "/editor/" + pathArray[2];
@@ -11,18 +11,33 @@ function sendQuestionInformation() {
     let answer2 = document.querySelector("#input_answer2").value;
     let answer3 = document.querySelector("#input_answer3").value;
 
-    if (question == "" || answer1 == "" || answer2 == "" || answer3 == "") {
+    if (question == "" && answer1 == "" && answer2 == "" && answer3 == "") {
         alert("Please input content.");
         return;
     }
 
+    if (question == "") {
+        alert("Please input the question.");
+        return;
+    }
+
+    if (answer1 == "" || answer2 == "" || answer3 == "") {
+        alert("Please make sure you have input 3 answers.");
+        return;
+    }
+
     let rightAns;
-    if (check == 1) {
-        rightAns = answer1;
-    } else if (check == 2) {
-        rightAns = answer2;
-    } else if (check == 3) {
-        rightAns = answer3;
+    if (check != null) {
+      if (check == 1) {
+          rightAns = answer1;
+      } else if (check == 2) {
+          rightAns = answer2;
+      } else if (check == 3) {
+          rightAns = answer3;
+      }
+    } else {
+      alert("Please make sure you assign the correct answer to one of the questions by clicking the circle next to it.");
+      return;
     }
 
     let q = [question, [answer1, answer2, answer3], rightAns];
