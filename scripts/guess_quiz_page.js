@@ -4,6 +4,7 @@ let countSeconds;
 let nowQuestionIndex = 0;
 let resultArray=[];
 let attemptArray = [0,0,0,0,0];
+let correctArray = [false,false,false,false,false];
 
 getQuizQuestions();
 
@@ -30,9 +31,12 @@ function initQuestionAndAnswers() {
 }
 
 function enterQuestion(index) {
+    if (correctArray[index]) {
+        return;
+    }
     if (attemptArray[index] >= 5) {
         alert("Sorry, you have tried too many times.");
-        return
+        return;
     }
     attemptArray[index]++;
 
@@ -67,6 +71,7 @@ function selectAnswer(index) {
         alert("Correct");
         let wrap = document.getElementById("wrapper" + nowQuestionIndex);
         wrap.setAttribute("style", "opacity:0");
+        correctArray[nowQuestionIndex] = true;
 
         let result = {};
         result.result=index;
