@@ -5,28 +5,18 @@
   <title>Question Pool</title>
   <link rel="stylesheet" type="text/css" href="/css/style-main.css">
   <link rel="stylesheet" type="text/css" href="/css/style-editor-options.css">
+  <link rel="stylesheet" type="text/css" href="/css/style-checks.css">
 </head>
 <body>
 
   <section>
     <div class="container content">
-      <img src="/image/ic_close.png" class="close" onclick="goHome()">
-      <h1 class="p_title">Select an Option:</h1>
-      <div id="list">
-        <form>
-          <div class="item">
-            <input type="radio" name="option" value="a" id="add">
-            <label for="view">Question From Pool</label><br>
-          </div>
-          <div class="item">
-            <input type="radio" name="option" value="b" id="addCustom">
-            <label for="prepare">Custom Question</label><br>
-          </div>
-
-          <div class="button-holder">
-            <button type="button" name="button" class="btn" onClick="validateForm()">Submit</button>
-          </div>
-        </form>
+      <img src="/image/ic_close.png" class="close" onclick="goBack()">
+      <h1 class="p_title"></h1>
+      <h2>Choose what type of question you'd like to add:</h2>
+      <div id="list"></div>
+      <div class="button-holder">
+        <button type="button" name="button" class="btn" onClick="validateForm()">Submit</button>
       </div>
     </div>
   </section>
