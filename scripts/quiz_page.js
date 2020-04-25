@@ -102,6 +102,7 @@ function handleSelectAnswer(index) {
   });
   result["result"] = index;
   result["right"] = rightIndex;
+  result["index"] = nowQuestionIndex;
   if (q.answers[index] == q.rightAns) {
     indicator.setAttribute("src", "/image/check.svg");
     changeColor("green",index,q.answers[index]);
