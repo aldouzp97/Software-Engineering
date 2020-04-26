@@ -74,7 +74,7 @@ function commitCustomChanges() {
 
 function getQuizNumber() {
   let quizId=1;
-  if (pathArray[1] == "preview") {
+  if (pathArray[1] === "preview" || pathArray[1] === "confirmQuiz" || pathArray[1] === "confirmCustomQuiz") {
       quizId = pathArray[2];
   }
   return quizId;

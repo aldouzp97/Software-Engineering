@@ -43,7 +43,7 @@ function initList(res) {
 
 function getQuizNumber() {
   let quizId=1;
-  if (pathArray[1] == "preview") {
+  if (pathArray[1] === "preview" || pathArray[1] === "previewAdd"  || pathArray[1] === "previewAddCustom") {
       quizId = pathArray[2];
   }
   return quizId;
