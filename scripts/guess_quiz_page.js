@@ -5,6 +5,7 @@ let nowQuestionIndex = 0;
 let resultArray=[];
 let attemptArray = [0,0,0,0,0];
 let correctArray = [false,false,false,false,false];
+let attempt = 0;
 
 getQuizQuestions();
 
@@ -93,6 +94,13 @@ function answerGuess() {
         alert("Please answer the question first.");
         return
     }
+
+    if (attempt>4) {
+        alert("Sorry, you have tried too many times. Please restart the quiz.");
+        return;
+    }
+    attempt++;
+
     let guess = document.getElementById("guess").value;
     if (guess == "wolf") {
         let dialog = document.getElementById("dialog_finish");
