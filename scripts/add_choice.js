@@ -98,7 +98,7 @@ function getWaitingList() {
 function getQuizNumber() {
   let pathArray = window.location.pathname.split("/");
   let quizId=1;
-  if (pathArray[1] == "editor") {
+  if (pathArray[1] == "addChoice") {
     quizId = pathArray[2];
   }
   return quizId;
