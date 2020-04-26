@@ -35,7 +35,7 @@ function enterQuestion(index) {
     if (correctArray[index]) {
         return;
     }
-    if (attemptArray[index] >= 5) {
+    if (attemptArray[index] >= 1) {
         alert("Sorry, you have tried too many times.");
         return;
     }
